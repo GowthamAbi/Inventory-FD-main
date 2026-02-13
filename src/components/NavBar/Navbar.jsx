@@ -12,7 +12,8 @@ import Menu from '../../Icons/dots-menu.png'
 export default function Navbar() {
 
   const [down,setDown]=useState(false)
-  const option=["1","2","3","4","5"];0
+  const [select,setSelect]=useState(null);
+  const option=["1","2","3","4","5","6","7","8"];
 
   const handleOption=()=>{
       
@@ -26,14 +27,23 @@ export default function Navbar() {
        <div className='flex items-center gap-4 rounded-lg  p-2 bg-gray-300 border border-white  hover:border-blue-600'>
         <img src={Search} alt="" className='w-4 h-4' />
         <img src={Arrow} alt=""  className='w-4 h-4' onClick={()=>setDown(!down)}/>
-         <select className='absolute mt-12 ml-4 w-64 bg-white hover:bg-blue-500 ' >
-            {
+            { down && <div className='absolute  bg-white top-16 w-64 
+            p-2 rounded-lg shadow-2xl
+             '>
+            <div className='overflow-y-auto  w-64 h-64'>
+            { 
               option.map((index,item)=>(
-                <option key={index} className='p-2 overflow-y-auto
-                 hover:bg-blue-500 cursor-pointer '>{item}</option>
+                <div key={index} className='hover:bg-blue-500 rounded-lg   ' >
+                <h4  className={`${`p-2 cursor-pointer ${select}` }`}  onClick={()=>(setSelect("bg-gray-200"))}>{item}</h4>
+                 </div>
               ))
             }
-          </select> 
+            </div>
+            <div >
+            <h4 className='p-2 hover:bg-blue-500 rounded-lg cursor-pointer'>Advanced Search</h4>
+            <h4 className='p-2 hover:bg-blue-500 rounded-lg cursor-pointer'>Search across Zoho</h4>
+            </div>
+        </div>}
          <input type="text" name="" id="" className='w-32 h-4 outline-none focus:outline-none hover:w-64  focus:w-64'/>
        </div>
       </div>
