@@ -56,15 +56,15 @@ export default function Navbar() {
       </div>
 
       {/* Rigth side*/}
-      <div className='flex justify-between gap-8 items-center'>
+      <div className='flex justify-between gap-8 items-center relative'>
         <p>This is a Test Organization</p>
         <div className='flex justify-between items-center gap-2'>
           <p>Demo Org</p>
           <img src={Arrow} alt=""  className='w-6 h-6' />
         </div>
-          <img src={Add} alt=""  className='w-12 h-12 relative' onClick={()=>setAddItem(!addItem)} />
+          <img src={Add} alt=""  className='w-12 h-12 ' onClick={()=>setAddItem(!addItem)} />
 
-              {addItem &&<div className='absolute w-64 h-64 bg-white top-16 p-2 rounded-sm shadow-2xl'>
+              {addItem &&<div className='absolute w-4xl  bg-white right-1 top-16 p-2 rounded-sm shadow-2xl flex justify-center  '>
                 <div>
                   <div className='flex items-center gap-2 p-2'>
                   <img src={Menu} alt="" className='w-4 h-4' />
@@ -74,17 +74,56 @@ export default function Navbar() {
                     general.map((item,index)=>(
                       <div key={index} className='flex  items-center gap-2 py-2 px-6'>
                         <img src={Add} alt=""  className='w-4 h-4' />
-                        <p className='hover:underline decoration-2 decoration-transparent decoration-blue-500  cursor-pointer'>{item}</p>
+                        <p className='hover:underline decoration-2  decoration-blue-500  cursor-pointer'>{item}</p>
                       </div>
                     ))
                     }</div>
                 </div>
 
-                <div></div>
+                <div>
+                  <div className='flex items-center gap-2 p-2'>
+                  <img src={Menu} alt="" className='w-4 h-4' />
+                  <h3>Inventory</h3>
+                  </div>
+                  <div>{
+                    inventory.map((item,index)=>(
+                      <div key={index} className='flex  items-center gap-2 py-2 px-6'>
+                        <img src={Add} alt=""  className='w-4 h-4' />
+                        <p className='hover:underline decoration-2  decoration-blue-500  cursor-pointer'>{item}</p>
+                      </div>
+                    ))
+                    }</div>
+                </div>
 
-                <div></div>
+                <div>
+                  <div className='flex items-center gap-2 p-2'>
+                  <img src={Menu} alt="" className='w-4 h-4' />
+                  <h3>Sales</h3>
+                  </div>
+                  <div>{
+                    sales.map((item,index)=>(
+                      <div key={index} className='flex  items-center gap-2 py-2 px-6'>
+                        <img src={Add} alt=""  className='w-4 h-4' />
+                        <p className='hover:underline decoration-2  decoration-blue-500  cursor-pointer'>{item}</p>
+                      </div>
+                    ))
+                    }</div>
+                </div>
 
-                <div></div>
+                <div>
+                  <div className='flex items-center gap-2 p-2'>
+                  <img src={Menu} alt="" className='w-4 h-4' />
+                  <h3>Purchases</h3>
+                  </div>
+                  <div>{
+                    purchases.map((item,index)=>(
+                      <div key={index} className='flex  items-center gap-2 py-2 px-6'>
+                        <img src={Add} alt=""  className='w-4 h-4' />
+                        <p className='hover:underline decoration-2  decoration-blue-500  cursor-pointer'>{item}</p>
+                      </div>
+                    ))
+                    }</div>
+                </div>
               </div>
 
               }
