@@ -13,10 +13,17 @@ export default function Navbar() {
 
   const [down,setDown]=useState(false)
   const [select,setSelect]=useState(null);
+  const [addItem,setAddItem]=useState(false);
   const option=["1","2","3","4","5","6","7","8"];
+  const general=["Add User","Item","Item Groups","Composite Items"]
+  const inventory=["Inventory Adjustments","packages","Shipment"]
+  const sales=["Customer","Delivery Challan","Invoices","Retainer Invoices","Sales Order","Customer Payment","Credit Notes"]
+  const purchases=["Ventor","Bill","Purchase order","Purchase Receive","Vendor Payment","Vendor Credit"]
 
-  const handleOption=()=>{
-      
+  const handleOption=(item)=>{
+
+        setSelect(item)
+
   }
 
   return (
@@ -33,16 +40,16 @@ export default function Navbar() {
             <div className='overflow-y-auto  w-64 h-64'>
             { 
               option.map((index,item)=>(
-                <div key={index} className='hover:bg-blue-500 rounded-lg   ' >
-                <h4  className={`${`p-2 cursor-pointer ${select}` }`}  onClick={()=>(setSelect("bg-gray-200"))}>{item}</h4>
+                <div key={index} className='hover:bg-blue-500 rounded-lg m-2  ' onClick={()=>handleOption(item)}>
+                <h4  className={`${select==item?"bg-blue-400 rounded-sm  text-white":"bg-white"} p-2 hover:bg-gray-400 hover:rounded-sm`}  >{item}</h4>
                  </div>
               ))
             }
             </div>
             <div >
-            <h4 className='p-2 hover:bg-blue-500 rounded-lg cursor-pointer'>Advanced Search</h4>
-            <h4 className='p-2 hover:bg-blue-500 rounded-lg cursor-pointer'>Search across Zoho</h4>
-            </div>
+            <h4 className='p-2 hover:bg-gray-500 hover:text-white rounded-lg cursor-pointer'>Advanced Search</h4>
+            <h4 className='p-2 hover:bg-gray-500 hover:text-white rounded-lg cursor-pointer'>Search across Zoho</h4>
+            </div> 
         </div>}
          <input type="text" name="" id="" className='w-32 h-4 outline-none focus:outline-none hover:w-64  focus:w-64'/>
        </div>
@@ -55,7 +62,33 @@ export default function Navbar() {
           <p>Demo Org</p>
           <img src={Arrow} alt=""  className='w-6 h-6' />
         </div>
-          <img src={Add} alt=""  className='w-12 h-12'/>
+          <img src={Add} alt=""  className='w-12 h-12 relative' onClick={()=>setAddItem(!addItem)} />
+
+              {addItem &&<div className='absolute w-64 h-64 bg-white top-16 p-2 rounded-sm shadow-2xl'>
+                <div>
+                  <div className='flex items-center gap-2 p-2'>
+                  <img src={Menu} alt="" className='w-4 h-4' />
+                  <h3>General</h3>
+                  </div>
+                  <div>{
+                    general.map((item,index)=>(
+                      <div key={index} className='flex  items-center gap-2 py-2 px-6'>
+                        <img src={Add} alt=""  className='w-4 h-4' />
+                        <p className='hover:underline decoration-2 decoration-transparent decoration-blue-500  cursor-pointer'>{item}</p>
+                      </div>
+                    ))
+                    }</div>
+                </div>
+
+                <div></div>
+
+                <div></div>
+
+                <div></div>
+              </div>
+
+              }
+
           <img src={Refer} alt=""  className='w-6 h-6'/>  
           <img src={Notification} alt="" className='w-6 h-6' />
           <img src={Setting} alt=""  className='w-6 h-6'/>
