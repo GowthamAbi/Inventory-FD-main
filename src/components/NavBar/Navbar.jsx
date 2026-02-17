@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import Recent from '../../Icons/history.png'
-import Arrow from '../../Icons/down-arrow.png'
-import Search from '../../Icons/search.png'
-import Refer from '../../Icons/connection.png'
-import Add from '../../Icons/add-button.png'
-import Notification from '../../Icons/notification.png'
-import Setting from '../../Icons/setting.png'
-import User from '../../Icons/user.png'
-import Menu from '../../Icons/dots-menu.png'
+import Recent from '../../Icons/NavIcons/history.png'
+import Arrow from '../../Icons/NavIcons/down-arrow.png'
+import Search from '../../Icons/NavIcons/search.png'
+import Refer from '../../Icons/NavIcons/connection.png'
+import Add from '../../Icons/NavIcons/add-button.png'
+import Notification from '../../Icons/NavIcons/notification.png'
+import Setting from '../../Icons/NavIcons/setting.png'
+import User from '../../Icons/NavIcons/user.png'
+import Menu from '../../Icons/NavIcons/dots-menu.png'
 
 export default function Navbar() {
 
