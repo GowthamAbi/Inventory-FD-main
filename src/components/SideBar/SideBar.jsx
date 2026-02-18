@@ -1,13 +1,22 @@
 import { useState } from 'react'
 import { home, inventory,arrow, sales,items, purchase, reports, documents } from '../../Icons/SidebarIcons/SidebarIcons'
+import {  useNavigate } from 'react-router-dom'
 export default function SideBar() {
     const[inventoryActive,setInventoryActive]=useState(false)
     const[salesActive,setSalesActive]=useState(false)
     const[itemsActive,setItemsActive]=useState(false)
     const[purchaseActive,setPurchaseActive]=useState(false)
-    const[isActive ,setIsActive]=useState(null)
     const[isSelect ,setIsSelect]=useState(null)
     
+    const navigate=useNavigate()
+    const handleCLick=({list})=>{
+        setIsSelect(list)
+        
+         const item = list.toLowerCase().replace(/\s+/g, "");
+
+        navigate(`/inventory/${item}`)
+        
+    }
     
   return (
     <div className='bg-[#21263c] w-64  h-screen overflow-y-auto leading-10 '>
@@ -35,8 +44,8 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {itemsActive && item.list.map((list,j)=>(
-                            <ul key={j} className="  text-white" onClick={()=>setIsSelect(list)}>
-                                <li className={`${isSelect===list?"bg-blue-500 pl-14 rounded-lg":"pl-14 hover:bg-gray-700"}`}>{list}</li>
+                            <ul key={j} className="  text-white" onClick={()=>handleCLick({list})}>
+                                <li className={`${isSelect===list?"bg-blue-500 pl-14 rounded-lg":"pl-14 hover:bg-gray-700"}`} >{list}</li>
                             </ul>
                         ))}
                     </div>
