@@ -4,10 +4,11 @@ export default function AddItems() {
   const [isgoods,setIsGoods]=useState(false)
   const [units,setUnits]=useState(null)
   return (
-    <div className='overflow-y-clip ' >
+    <div className="p-4">
+
              <p>New Item</p>
 
-          <form action="">
+          <form action="" >
             <div className='flex gap-4 items-center p-4 w-full'>
                 <p>Type </p>
                 <div className='flex gap-4 items-center cursor-pointer'>      
@@ -25,7 +26,7 @@ export default function AddItems() {
             </div>
 
           {/*New Item Name Image */}
-            <div className=' p-4 bg-gray-100 flex  w-full'>
+            <div className=' p-4 bg-gray-100 flex  '>
 
               <div className='w-1/2'>
               <div className=' flex gap-4  pb-4 '>
@@ -92,11 +93,11 @@ export default function AddItems() {
                 </div>
                   
                 <div className='border border-gray-300 rounded-lg w-1/2 h-10'>
-                  <input type="text" className='outline-none text-end p-2 w-28 ' /> 
+                  <input type="text" className='outline-none text-end p-2 w-26 ' /> 
                   <span className='text-gray-400 '>x</span>
-                  <input type="text" className='outline-none text-end p-2 w-28'/> 
+                  <input type="text" className='outline-none text-end p-2 w-26'/> 
                   <span className='text-gray-400 '>x</span>
-                  <input type="text" className='outline-none text-end p-2 w-28 '/>
+                  <input type="text" className='outline-none text-end p-2 w-26 '/>
                   <select name="" id="" className='outline-none w-14 p-2 text-center '>
                     <option value=""></option>
                     <option value="in">in</option>

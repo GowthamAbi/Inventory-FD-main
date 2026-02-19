@@ -19,11 +19,11 @@ export default function SideBar() {
     }
     
   return (
-    <div className='bg-[#21263c] w-64  h-screen overflow-y-auto leading-10 '>
+        <div className="fixed  w-64 h-screen bg-[#21263c] overflow-y-auto  leading-10">    
 
         <h1 className='bg-[#101324] text-center text-white text-xl mb-4 py-4 rounded-b-2xl'>UG Inventory</h1>
 
-            <div className="flex items-center   gap-2 pl-8  cursor-pointer  hover:bg-gray-700 rounded-lg">
+            <div className="flex items-center gap-2 pl-8 cursor-pointer  hover:bg-gray-700 rounded-lg">
                 {home.map((item,index)=>(
                     <div key={index} className="flex items-center gap-2">
                         
