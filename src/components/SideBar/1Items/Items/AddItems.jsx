@@ -23,7 +23,7 @@ export default function AddItems() {
           </div>
       </div>
 
-
+    {/*New Item Name Image */}
       <div className=' p-4 bg-gray-100 flex  w-full'>
 
         <div className='w-1/2'>
@@ -44,7 +44,7 @@ export default function AddItems() {
         <div className=' flex gap-4  pb-4 '>
           <span className='w-2/6 '>Unit</span>
          <select  value={units}  className='border bg-white rounded-sm
-         border-gray-200 w-1/2  outline-blue-400 p-1' onChange={(e)=>setUnits(e.target.value)}>
+         border-gray-200 w-1/2  outline-blue-400 p-1 cursor-pointer' onChange={(e)=>setUnits(e.target.value)}>
           <option value="" >Select or type to add</option>
           <option value="DOZEN">DOZ - DOZEN</option>
           <option value="BOX">BOX - BOX</option>
@@ -79,7 +79,31 @@ export default function AddItems() {
 
       </div>
       
+    {/* Item outlook */}
 
+    <div className='w-full'>
+         
+       <div className=' flex gap-4 w-1/2  pb-4 '>
+          <div className='flex flex-col pl-2'>
+          <span className='w-2/6 '>Dimensions</span>
+          <span className='text-gray-400'>(Length X Width X Height)</span>
+          </div>
+        <div className='border border-gray-300 rounded-lg w-4/6 h-10'>
+          <input type="text" className='outline-none text-end p-2 w-22 ' /> 
+          <span className='text-gray-400 '>x</span>
+          <input type="text" className='outline-none text-end p-2 w-22'/> 
+          <span className='text-gray-400 '>x</span>
+          <input type="text" className='outline-none text-end p-2 w-22 '/>
+          <select name="" id="" className='outline-none w-17 p-2 text-center '>
+            <option value=""></option>
+            <option value="in">in</option>
+            <option value="cm">cm</option>
+          </select>
+        </div>
+    
+            
+          </div>
+    </div>
 
 
 
