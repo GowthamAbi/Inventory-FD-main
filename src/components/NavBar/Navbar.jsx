@@ -27,7 +27,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className='flex justify-between items-center bg-gray-200' >
+    <div className='flex justify-between items-center bg-gray-200 ' >
       {/* Recent active and Search bar*/}
       <div className='flex items-center gap-4 p-4 relative '>
         <img src={Recent} alt="recent" className='w-6 h-6 '/>
