@@ -17,6 +17,17 @@ export default function SideBar() {
         navigate(`/inventory/${item}`)
         
     }
+
+        const handlenavigate=({list})=>{
+            console.log("You are enter add button")
+        setIsSelect(list)
+        
+         const item = list.toLowerCase().replace(/\s+/g, "");
+
+         console.log(item)
+        navigate(`/inventory/${item}/new`)
+        
+    }
     
   return (
         <div className="fixed  w-64 h-screen bg-[#21263c] overflow-y-auto  leading-10">    
@@ -44,8 +55,10 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {itemsActive && item.list.map((list,j)=>(
-                            <ul key={j} className="  text-white" onClick={()=>handleCLick({list})}>
-                                <li className={`${isSelect===list?"bg-blue-500 pl-14 rounded-lg":"pl-14 hover:bg-gray-700"}`} >{list}</li>
+                            <ul key={j} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":
+                            "justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
+                                <li onClick={()=>handleCLick({list})}>{list}</li>
+                                <button className='cursor-pointer pr-4 text-lg bg-' onClick={()=>handlenavigate({list})}>+</button>
                             </ul>
                         ))}
                     </div>
@@ -64,8 +77,9 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {inventoryActive && item.list.map((list,j)=>(
-                            <ul key={j} className="  text-white" onClick={()=>setIsSelect(list)}>
-                                <li className={`${isSelect===list?"bg-blue-500 pl-14 rounded-lg":"pl-14 hover:bg-gray-700"}`}>{list}</li>
+                            <ul key={j} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
+                                <li onClick={()=>handleCLick({list})} >{list}</li>
+                                <button className='cursor-pointer pr-4 text-lg bg-' onClick={()=>handlenavigate({list})}>+</button>
                             </ul>
                         ))}
                     </div>
@@ -84,8 +98,9 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {salesActive && item.list.map((list,j)=>(
-                            <ul key={j} className="  text-white" onClick={()=>setIsSelect(list)}>
-                                <li className={`${isSelect===list?"bg-blue-500 pl-14 rounded-lg":"pl-14 hover:bg-gray-700"}`}>{list}</li>
+                            <ul key={j} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
+                                <li onClick={()=>handleCLick({list})}>{list}</li>
+                                <button className='cursor-pointer pr-4 text-lg bg-' onClick={()=>handlenavigate({list})}>+</button>
                             </ul>
                         ))}
                     </div>
@@ -104,8 +119,9 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {purchaseActive && item.list.map((list,j)=>(
-                            <ul key={j} className=" text-white" onClick={()=>setIsSelect(list)}>
-                                <li className={`${isSelect===list?"bg-blue-500 pl-14 rounded-lg":"pl-14 hover:bg-gray-700"}`}>{list}</li>
+                            <ul key={j} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
+                                <li onClick={()=>handleCLick({list})}>{list}</li>
+                                <button className='cursor-pointer pr-4 text-lg bg-' onClick={()=>handlenavigate({list})}>+</button>
                             </ul>
                         ))}
                     </div>
