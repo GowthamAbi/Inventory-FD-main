@@ -6,6 +6,19 @@ import ItemGroup from './components/SideBar/1Items/Items/ItemGroup'
 import PriceLists from './components/SideBar/1Items/Items/PriceLists'
 import CompositeItmes from './components/SideBar/1Items/Items/CompositeItmes'
 
+
+{/* Purchases List */}
+import BillList from './components/SideBar/Purchases/List/BillList'
+import POReceiveList from './components/SideBar/Purchases/List/POReceiveList'
+import PurchasesOrderList from './components/SideBar/Purchases/List/PurchasesOrderList'
+import VendorList from './components/SideBar/Purchases/List/VendorList'
+
+{/* Purchases Create */}
+import Bills from './components/SideBar/Purchases/Create/Bills'
+import POReceive from './components/SideBar/Purchases/Create/POReceive'
+import PurchasesOrder from './components/SideBar/Purchases/Create/PurchasesOrder'
+import VendorRegister from './components/SideBar/Purchases/Create/VendorRegister'
+
 export default function App() {
   return (
     <div>
@@ -21,7 +34,21 @@ export default function App() {
         <Route path='inventory/itemgroups' element={<ItemGroup/>}/>
         <Route path='inventory/pricelist' element={<PriceLists/>}/>
 
+        {/* Add Items  */}
         <Route path='inventory/compositeitems/new' element={<AddItems/>}/>
+        
+
+         {/* Purchases List */}
+        <Route path='inventory/bills' element={<BillList/>}/>
+        <Route path='inventory/purchasereceive' element={<POReceiveList/>}/>
+        <Route path='inventory/purchaseorder' element={<PurchasesOrderList/>}/>
+        <Route path='inventory/vendors' element={<VendorList/>}/>
+
+        {/* Purchases Create */}
+        <Route path='inventory/bills/new' element={<Bills/>}/>
+        <Route path='inventory/purchasereceive/new' element={<POReceive/>}/>
+        <Route path='inventory/purchaseorder/new' element={<PurchasesOrder/>}/>
+        <Route path='inventory/vendors/new' element={<VendorRegister/>}/>
         </Route>
       </Routes>
       

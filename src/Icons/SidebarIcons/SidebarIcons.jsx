@@ -24,7 +24,7 @@
     </g>
 </svg>),
         name:"Purchases",
-        list:["Vendors","Purchase Orders","Purchase Receives","Bills","Payment Made","Vendor Credits"]}]
+        list:["Vendors","Purchase Order","Purchase Receive","Bills"]}]
 
     
   export const items=[{
