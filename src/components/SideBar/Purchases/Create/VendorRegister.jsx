@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 export default function VendorRegister() {
   const[isOption,setIsOption]=useState(null)
 
-  const option=["Other Details","Address","Contact Persons","Bank Details","Custom Fields","Reporting Tags","Remarks"]
+  const option=["Address","Contact Persons","Bank Details","Custom Fields","Reporting Tags","Remarks"]
 
 
   return (
@@ -85,16 +85,18 @@ export default function VendorRegister() {
   <hr className="w-1/2 mx-4 my-3 border-gray-300" />
 
   {/* Content */}
-  {isOption === "Other Details" && (
-    <div className="p-4">
+  {isOption === "Address" && (
+    <div className="p-4 w-1/2">
+      <h1>Billing Address</h1>
       <div className="flex items-center gap-4">
-        <p className="w-2/6">Email Address</p>
+        <p className="w-2/6">D.No</p>
         <input
-          type="email"
+          type="text"
           className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
-          placeholder="Enter email"
+          
         />
       </div>
+
     </div>
   )}
 </div>
