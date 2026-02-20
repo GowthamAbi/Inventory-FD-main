@@ -86,9 +86,11 @@ export default function VendorRegister() {
 
   {/* Content */}
   {isOption === "Address" && (
-    <div className="p-4 w-1/2">
-      <h1>Billing Address</h1>
-      <div className="flex items-center gap-4">
+    <div className="p-4 w-full flex" >
+
+    <div className="p-4 w-1/2 ">
+       <h1 className='text-center '>Billing Address</h1>
+      <div className="flex items-center gap-4 py-4">
         <p className="w-2/6">D.No</p>
         <input
           type="text"
@@ -97,8 +99,207 @@ export default function VendorRegister() {
         />
       </div>
 
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Street Name</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
+
+        <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Village</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
+
+       <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">City</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Pin Code</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
     </div>
-  )}
+
+    <div className="p-4 w-1/2">
+      <h1 className='text-center'>Shipping Address</h1>
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">D.No</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Street Name</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
+
+        <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Village</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
+
+       <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">City</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Pin Code</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          
+        />
+      </div>
+    </div>
+
+    </div>       
+  )
+  }
+
+  {isOption === "Contact Persons" && (
+    <div className="p-4 w-full flex" >
+
+    <div className="p-4 w-1/2 ">
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Person 1</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+         placeholder='Name' 
+        />
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          placeholder='Phone Number'
+        />
+
+      </div>
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Person 2</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+         placeholder='Name' 
+        />
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          placeholder='Phone Number'
+        />
+
+      </div>
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Person 3</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+         placeholder='Name' 
+        />
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          placeholder='Phone Number'
+        />
+
+      </div>  
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Person 4</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+         placeholder='Name' 
+        />
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+          placeholder='Phone Number'
+        />
+
+      </div>          
+    </div>
+
+    </div>       
+  )
+  }
+
+    {isOption === "Bank Details" && (
+    <div className="p-4 w-full flex" >
+
+    <div className="p-4 w-1/2 ">
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Account Holder Name</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+        />
+      </div>
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">Bank Name</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+        />
+      </div>
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">IFSC NO</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+        />
+      </div>      
+
+      <div className="flex items-center gap-4 py-4">
+        <p className="w-2/6">ACCOUNT NO</p>
+        <input
+          type="text"
+          className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+        />
+      </div>         
+    </div>
+
+    </div>       
+  )
+  }
+
 </div>
 
       </div>
