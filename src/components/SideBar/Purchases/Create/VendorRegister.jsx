@@ -8,8 +8,16 @@ export default function VendorRegister() {
     "Contact Persons",
     "Bank Details",
     "Custom Fields",
-    "Reporting Tags",
+    "Attachment Files",
     "Remarks",
+  ];
+
+  const attachment = [
+    "Register Form",
+    "GST",
+    "BANK DETAILS",
+    "PANCARD",
+    "OTHERS",
   ];
 
   return (
@@ -319,6 +327,22 @@ export default function VendorRegister() {
             </div>
           )}
 
+          {isOption === "Attachment Files" && (
+            <div className="p-4 w-full flex">
+              <div className="p-4 w-full  text-center flex gap-4 overflow-y-auto ">
+                {attachment.map((item, index) => (
+                  <div key={index}>
+                    <div className="w-32 h-32 border border-dashed flex justify-center items-center rounded-lg ">
+                      <input type="file" id="uploadFile" className="hidden" />
+                      <label htmlFor="uploadFile"> +</label>
+                    </div>
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="flex gap-2 justify-center items-center py-4">
             <button className="bg-blue-500 rounded-lg px-4 text-white cursor-pointer hover:bg-blue-200 hover:text-black ">
               Save
@@ -341,7 +365,7 @@ export default function VendorRegister() {
 "Contact Persons",
 "Bank Details",
 "Custom Fields",
-"Reporting Tags",
+"Attachment Files",
 "Remarks"]
 
 */
