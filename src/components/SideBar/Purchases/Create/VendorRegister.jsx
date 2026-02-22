@@ -111,7 +111,7 @@ export default function VendorRegister() {
                 </p>
 
                 <div
-                  className={`w-full h-[2px] transition-all duration-300
+                  className={`w-full h-2px transition-all duration-300
             ${isOption === item ? "bg-blue-500" : "bg-transparent"}
           `}
                 />

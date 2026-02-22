@@ -1,74 +1,146 @@
-import { useState } from "react"
+import React, { useState } from 'react'
+import Select from 'react-select'
+
 
 export default function POReceive() {
-  const [rows, setRows] = useState([
-    { name: "", qty: "" }
+  const[inputData,setInputData]=useState([
+    {item:"",order:"",receive:"",transit:"",qtyReceive:""}
   ])
+  const options=[
+  { value: "apple", label: "Apple" },
+  { value: "banana", label: "Banana" },
+  { value: "orange", label: "Orange" },
+  ]
 
-  // add new empty row
-  const addRow = () => {
-    setRows([...rows, { name: "", qty: "" }])
-  }
+  const poNumber=[
+ { value: "po-1234", label: "po-1234" },
+  { value: "po-2349", label: "po-2349" },
+  { value: "po-8764", label: "po-8764" },
+  ]
 
-  // update input data
-  const handleChange = (index, field, value) => {
-    const updatedRows = [...rows]
-    updatedRows[index][field] = value
-    setRows(updatedRows)
+  const itemDetails=[
+    {}
+  ]
+
+const handleChange=(index,field,value)=>{
+
+const updatedRows =[...rows]
+updatedRows[index][field]=value
+
+setInputData(updatedRows)
   }
 
   const handleRemove=(index)=>{
-    const updateRow=rows.filter((_,i)=>i!==index)
-    setRows(updateRow)
+  
+    const updaterow=inputData.filter((_,i)=>i!==index)
+    setInputData(updaterow)
   }
+
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <button
-        onClick={addRow}
-        className="mb-4 bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        + Add Row
-      </button>
-
-      <div className="space-y-3">
-        {rows.map((row, index) => (
-          <div
-            key={index}
-            className="flex gap-4 border p-3 rounded"
-          >
-            <input
-              type="text"
-              placeholder="Item name"
-              value={row.name}
-              onChange={(e) =>
-                handleChange(index, "name", e.target.value)
-              }
-              className="border p-2 rounded w-1/2"
-            />
-
-            <input
-              type="number"
-              placeholder="Qty"
-              value={row.qty}
-              onChange={(e) =>
-                handleChange(index, "qty", e.target.value)
-              }
-              className="border p-2 rounded w-1/2"
-            />
-
-          <div>
-        <button onClick={(e)=>handleRemove(index)}>Remove</button>
-      </div>
-          </div>
-        ))}
+    <div>
+      {/* Vendor Select */}
+      <div>
+        <div className='flex items-center mt-8 gap-16 px-2 '>
+          <p>Vendor Name</p>
+          <Select options={options} isSearchable isClearable   placeholder='Search Vendor Name'
+           className='w-1/2  '/>
+        </div>
+        
+        <div className='flex items-center mt-8 gap-18 px-2 '>
+          <p className='text-red-500'>Po Number*</p>
+          <Select options={poNumber} isSearchable isClearable placeholder='Search Po Number'
+           className='w-1/2  '/>
+        </div>
       </div>
 
+      {/* Po Select */}
+      
+        <div className='flex items-center mt-8 gap-18 px-2 '>
+          <p className='text-red-500'>Po Receive Number*</p>
+          <input type="text" className='w-[20%] border border-gray-300 outline-none px-2 rounded-lg' />
+        </div>
+        <div>
+         <div className='flex items-center mt-8 gap-30 px-2 '>
+          <p className='text-red-500'>Receive Date*</p>
+          <input type="date" className='w-[20%]  border border-gray-300 outline-none px-2 rounded-lg' />
+        </div>
+     
+      </div>
 
+      {/* Items table */}
 
-      {/* Debug output */}
-      <pre className="mt-4 bg-gray-100 p-2 text-sm">
-        {JSON.stringify(rows, null, 2)}
-      </pre>
+      <table>
+        <thead>
+          <tr>
+            <th>Items & Description</th>
+            <th>Ordered</th>
+            <th>Received</th>
+            <th>In Transit</th>
+            <th>Quantity to Receive</th>
+          </tr>
+        </thead>
+        <tbody>
+  {inputData.map((i, index) => (
+    <tr key={index}>
+      <td>
+        <input
+          value={i.item}
+          onChange={(e) => handleChange(index, "item", e.target.value)}
+          className="border px-2 w-full"
+        />
+      </td>
+
+      <td>
+        <input
+          value={i.order}
+          onChange={(e) => handleChange(index, "order", e.target.value)}
+          className="border px-2 w-full"
+        />
+      </td>
+
+      <td>
+        <input
+          value={i.receive}
+          onChange={(e) => handleChange(index, "receive", e.target.value)}
+          className="border px-2 w-full"
+        />
+      </td>
+
+      <td>
+        <input
+          value={i.transit}
+          onChange={(e) => handleChange(index, "transit", e.target.value)}
+          className="border px-2 w-full"
+        />
+      </td>
+
+      <td>
+        <input
+          value={i.qtyReceive}
+          onChange={(e) => handleChange(index, "qtyReceive", e.target.value)}
+          className="border px-2 w-full"
+        />
+      </td>
+
+      <td>
+        <button
+          type="button"
+          onClick={() => handleRemove(index)}
+          disabled={inputData.length < 2}
+          className="text-red-500 text-2xl font-bold px-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          ×
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+      </table>
+      <div>
+        <button   onClick={()=>setInputData(pre=>[...pre,{item:"",order:"",receive:"",transit:"",qtyReceive:""}])}
+            className="bg-blue-500 text-white px-4  mt-8 rounded-3xl pb-2 cursor-pointer hover:bg-blue-600 ">
+          <span className="text-2xl font-bold text-center">+</span> Add Row</button>
+      </div>
     </div>
   )
 }
