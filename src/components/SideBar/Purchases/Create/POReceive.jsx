@@ -24,7 +24,7 @@ export default function POReceive() {
 
 const handleChange=(index,field,value)=>{
 
-const updatedRows =[...rows]
+const updatedRows =[...inputData]
 updatedRows[index][field]=value
 
 setInputData(updatedRows)
@@ -69,60 +69,60 @@ setInputData(updatedRows)
 
       {/* Items table */}
 
-      <table>
+      <table className='m-4'>
         <thead>
-          <tr>
-            <th>Items & Description</th>
-            <th>Ordered</th>
-            <th>Received</th>
-            <th>In Transit</th>
-            <th>Quantity to Receive</th>
+          <tr >
+            <th className='border py-4'>Items & Description</th>
+            <th className='border '>Ordered</th>
+            <th className='border '>Received</th>
+            <th className='border '>In Transit</th>
+            <th className='border '>Quantity to Receive</th>
           </tr>
         </thead>
         <tbody>
   {inputData.map((i, index) => (
-    <tr key={index}>
-      <td>
+    <tr key={index} >
+      <td className='border py-4'>
         <input
           value={i.item}
           onChange={(e) => handleChange(index, "item", e.target.value)}
-          className="border px-2 w-full"
+          className="outline-none  px-2 w-full"
         />
       </td>
 
-      <td>
+      <td className='border '>
         <input
           value={i.order}
           onChange={(e) => handleChange(index, "order", e.target.value)}
-          className="border px-2 w-full"
+          className="outline-none  px-2 w-full"
         />
       </td>
 
-      <td>
+      <td className='border '>
         <input
           value={i.receive}
           onChange={(e) => handleChange(index, "receive", e.target.value)}
-          className="border px-2 w-full"
+          className="outline-none  px-2 w-full"
         />
       </td>
 
-      <td>
+      <td className='border '>
         <input
           value={i.transit}
           onChange={(e) => handleChange(index, "transit", e.target.value)}
-          className="border px-2 w-full"
+          className="outline-none  px-2 w-full"
         />
       </td>
 
-      <td>
+      <td className='border '>
         <input
           value={i.qtyReceive}
           onChange={(e) => handleChange(index, "qtyReceive", e.target.value)}
-          className="border px-2 w-full"
+          className="outline-none px-2 w-full"
         />
       </td>
 
-      <td>
+      <td >
         <button
           type="button"
           onClick={() => handleRemove(index)}
