@@ -69,7 +69,7 @@ setInputData(updatedRows)
 
       {/* Items table */}
 
-      <table className='m-4'>
+      <table className='m-4 w-full'>
         <thead>
           <tr >
             <th className='border py-4'>Items & Description</th>
@@ -86,7 +86,7 @@ setInputData(updatedRows)
         <input
           value={i.item}
           onChange={(e) => handleChange(index, "item", e.target.value)}
-          className="outline-none  px-2 w-full"
+          className="outline-none  px-2 w-2/6"
         />
       </td>
 
@@ -94,7 +94,7 @@ setInputData(updatedRows)
         <input
           value={i.order}
           onChange={(e) => handleChange(index, "order", e.target.value)}
-          className="outline-none  px-2 w-full"
+          className="outline-none  px-2 w-1/6"
         />
       </td>
 
@@ -102,7 +102,7 @@ setInputData(updatedRows)
         <input
           value={i.receive}
           onChange={(e) => handleChange(index, "receive", e.target.value)}
-          className="outline-none  px-2 w-full"
+          className="outline-none  px-2 w-1/6"
         />
       </td>
 
@@ -110,7 +110,7 @@ setInputData(updatedRows)
         <input
           value={i.transit}
           onChange={(e) => handleChange(index, "transit", e.target.value)}
-          className="outline-none  px-2 w-full"
+          className="outline-none  px-2 w-1/6"
         />
       </td>
 
@@ -118,7 +118,7 @@ setInputData(updatedRows)
         <input
           value={i.qtyReceive}
           onChange={(e) => handleChange(index, "qtyReceive", e.target.value)}
-          className="outline-none px-2 w-full"
+          className="outline-none px-2 w-1/6"
         />
       </td>
 
@@ -141,6 +141,25 @@ setInputData(updatedRows)
             className="bg-blue-500 text-white px-4  mt-8 rounded-3xl pb-2 cursor-pointer hover:bg-blue-600 ">
           <span className="text-2xl font-bold text-center">+</span> Add Row</button>
       </div>
+
+      
+              <div className="p-4 w-full  gap-4 overflow-y-auto mt-6 flex flex-col items-center ">  
+                <label htmlFor=""> Attach File(s) to Purchase Receive</label>
+                    <div className="w-32 h-8 border border-dashed flex justify-center items-center rounded-lg  ">
+                      <input type="file" id="uploadFile" className="hidden" />
+                      <label htmlFor="uploadFile"> +</label>
+                    </div>
+              </div>
+       
+
+          <div className="flex gap-2 justify-center items-center py-4 mt-8">
+            <button className="bg-blue-500 rounded-lg px-4 text-white cursor-pointer hover:bg-blue-200 hover:text-black ">
+              Save
+            </button>
+            <button className="bg-green-500 rounded-lg px-4 text-white cursor-pointer hover:bg-green-200 hover:text-black">
+              Cancel
+            </button>
+          </div>
     </div>
   )
 }
