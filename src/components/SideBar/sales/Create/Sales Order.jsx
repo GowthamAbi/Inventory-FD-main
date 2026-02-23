@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from "react-select";
 
 export default function SalesOrder() {
 const[items,setItems]=useState({
@@ -7,6 +8,14 @@ const[items,setItems]=useState({
   const[rows,setRows]=useState([{itemDetails:"",qty:"",rate:"",amount:""}])
 
   const itemstable=["ITEM DETAILS","QUANTITY","RATE","AMOUNT"]
+
+  const options=[
+  { value: "apple", label: "Apple" },
+  { value: "banana", label: "Banana" },
+  { value: "orange", label: "Orange" },
+  ]
+
+
   const placeHolder={
     image:<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
@@ -41,17 +50,16 @@ setRows(updatedRows)
         {/*Vendor name and address*/}
         <div >
           <div className="flex  w-full pb-4">
-          <h4 className="text-red-500  w-1/6">Vendor Name*</h4>
+          <h4 className="text-red-500  w-1/6">Customer Name*</h4>
           <div className="flex justify-center items-center w-1/2">
-            <input type="text" className=" border-b border-l border-t border-gray-500
-             rounded-l-lg outline-none p-2 w-full" />
+            <Select options={options} className="   w-full" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
               stroke="currentColor"
-              className="w-10 h-11 rounded-r-lg  text-white bg-blue-500 "
+              className="w-10 h-10 rounded-r-lg  text-white bg-blue-500 "
             >
               <path
                 strokeLinecap="round"
@@ -63,17 +71,7 @@ setRows(updatedRows)
           </div>
 
           <div className="flex  w-full pb-4">
-            <p className="text-red-500 w-1/6">Delivery Address*</p>
-            <div className="flex gap-4">
-              <input type="radio" id="organization" name="type"/>
-              <label htmlFor="">Organization</label>
-              <input type="radio" id="customer" name="type" />
-              <label htmlFor="">Customer</label>
-            </div>
-          </div>
-
-          <div className="flex  w-full pb-4">
-            <p className="text-red-500 w-1/6">Purchase Order#*</p>
+            <p className="text-red-500 w-1/6">Sales Order#*</p>
             <input type="text" className=" border border-gray-500
              rounded-lg outline-none p-2 w-2/6" />
           </div>
@@ -85,13 +83,13 @@ setRows(updatedRows)
           </div>
 
           <div className="flex  w-full pb-4">
-            <p className=" w-1/6">Date</p>
+            <p className=" w-1/6 text-red-500 ">Sales Order Date*</p>
             <input type="date" className=" border border-gray-500
              rounded-lg outline-none p-2 w-2/6" />
           </div>
 
           <div className="flex  w-full pb-4">
-            <p className=" w-1/6">Delivery Date</p>
+            <p className=" w-1/6">Expected Shipment Date</p>
             <input type="date" className=" border border-gray-500
              rounded-lg outline-none p-2 w-2/6" />
           </div>
@@ -105,6 +103,7 @@ setRows(updatedRows)
                   <th className="border border-gray-300 h-12 w-2/4">ITEMS DETAILS</th>
                   <th className="border border-gray-300 h-12 w-1/4">QTY</th>
                   <th className="border border-gray-300 h-12 w-1/4">RATE</th>
+                  <th className="border border-gray-300 h-12 w-1/4">DISCOUNT</th>
                   <th className="border border-gray-300 h-12 px-8 w-1/4">AMOUNT</th>
 
                 </tr>
@@ -122,7 +121,10 @@ setRows(updatedRows)
                            </div>
                            </td>
                           <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.qty} onChange={(e)=>handleChange(index,"qty",e.target.value)} /></td>
-                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.rate} onChange={(e)=>handleChange(index,"rate",e.target.value)} /></td>
+                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" 
+                          placeholder={placeHolder.default}  value={i.rate} onChange={(e)=>handleChange(index,"rate",e.target.value)} /></td>
+                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" 
+                          placeholder={placeHolder.default}  value={i.discount} onChange={(e)=>handleChange(index,"discount",e.target.value)} /></td>
                           <td className="border border-gray-300 outline-none px-2 h-16 text-end   w-full">
                             {i.amount}
                             </td>
@@ -162,15 +164,17 @@ setRows(updatedRows)
                 <div className="w-1/2 ">
                 <p className="pb-4">Sub Total</p>
 
-                <div className="flex  gap-4 w-full pb-4">
-                  <p className="w-1/2">Discount</p>
-                  <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-1/2 "/><label htmlFor="">%</label>
+                <div className="flex  gap-4 w-full pb-4 ">
+                  <p className="w-full">Shipping Charges</p>
+                  <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-1/2 h-6"/><label htmlFor="">%</label>
                 </div>
 
                 <div className="flex  gap-4 w-full pb-4">
-                  <p className="w-1/2">GST</p>
-                  <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-1/2"/><label htmlFor="">%</label>
-                </div>  
+                  <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-full"/>
+                  <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-full"/>
+                </div> 
+
+        
               </div>
 
               <div className="w-1/2 text-end">
@@ -178,12 +182,13 @@ setRows(updatedRows)
                   <p className="pb-4">0.000</p>
                   <p className="pb-4">0.000</p>
                   <p className="pb-4">0.000</p>
+                    
               </div> 
               </div>
               
               <div className="w-full h-1 bg-gray-200"/>
               <div className="flex ">
-                <p className="w-1/2 pt-4">Total</p>
+                <p className="w-1/2 pt-4 text-2xl font-bold">Total (Rs.)</p>
                 <p className="w-1/2 text-end pt-4">0.000</p>
               </div>              
         </div>

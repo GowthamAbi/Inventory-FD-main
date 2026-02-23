@@ -2,6 +2,10 @@ import React, { useState } from "react";
 
 export default function Customers() {
   const [isOption, setIsOption] = useState(null);
+    const [istype,setIsType]=useState(false)
+    const[contact,setContact]=useState([{
+      Salution :"",FirstName:"",LastName:"",EmailAddress:"",WorkPhone:"",Mobile:"",Designation:"",Designation:""}
+    ])
 
   const option = [
     "Address",
@@ -20,13 +24,33 @@ export default function Customers() {
     "OTHERS",
   ];
 
+  const ContactPersons=[
+    "Salution","First Name","Last Name","Email Address","Work Phone","Mobile","Designation","Designation"
+  ]
+
   return (
     <div>
-      <h1>New Vendor</h1>
+      <h1>New Customer</h1>
 
       {/* Primary Deatails */}
       <div className="w-full">
         <div className="w-1/2 p-4 ">
+             <div className='flex gap-4 items-center p-2 w-full'>
+                <p className="w-2/6">Customer Type </p>
+
+                <div className='flex gap-4 items-center cursor-pointer'>      
+
+                  <label className='flex items-center gap-2' >
+                    <input type="radio" name="type" id="goods" onClick={()=>setIsType(!istype)} /> 
+                    <span>Business</span>
+                  </label>
+
+                  <label className='flex items-center gap-2'>
+                    <input type="radio" name="type" id="service" onClick={()=>setIsType(!istype)}  /> 
+                    <span>Individual</span>
+                  </label>
+                </div>
+            </div>       
           <div className="flex  p-2 gap-2 ">
             <p className="w-2/6"> Primary Contact</p>
             <div className="flex justify-center items-center gap-2 w-4/6">
@@ -65,6 +89,22 @@ export default function Customers() {
 
           <div className="flex  p-2 gap-2 ">
             <p className="w-2/6"> Display name</p>
+            <input
+              type="text"
+              className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+            />
+          </div>
+
+          <div className="flex  p-2 gap-2 ">
+            <p className="w-2/6"> Pan Card</p>
+            <input
+              type="text"
+              className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+            />
+          </div>
+
+          <div className="flex  p-2 gap-2 ">
+            <p className="w-2/6"> Aadhar Number</p>
             <input
               type="text"
               className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
@@ -214,7 +254,7 @@ export default function Customers() {
 
           {isOption === "Contact Persons" && (
             <div className="p-4 w-full flex">
-              <div className="p-4 w-1/2 ">
+              <div className="p-4 w-full ">
                 <div className="flex items-center gap-4 py-4">
                   <p className="w-2/6">Person 1</p>
                   <input
@@ -227,6 +267,16 @@ export default function Customers() {
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
                     placeholder="Phone Number"
                   />
+                  <input
+                    type="email"
+                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    placeholder="Email"
+                  />    
+                  <input
+                    type="text"
+                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    placeholder="Designation"
+                  />              
                 </div>
 
                 <div className="flex items-center gap-4 py-4">
@@ -241,6 +291,16 @@ export default function Customers() {
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
                     placeholder="Phone Number"
                   />
+                  <input
+                    type="email"
+                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    placeholder="Email"
+                  />  
+                  <input
+                    type="text"
+                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    placeholder="Designation"
+                  />                 
                 </div>
 
                 <div className="flex items-center gap-4 py-4">
@@ -255,6 +315,16 @@ export default function Customers() {
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
                     placeholder="Phone Number"
                   />
+                    <input
+                    type="email"
+                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    placeholder="Email"
+                  />  
+                  <input
+                    type="text"
+                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    placeholder="Designation"
+                  />
                 </div>
 
                 <div className="flex items-center gap-4 py-4">
@@ -268,6 +338,16 @@ export default function Customers() {
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
                     placeholder="Phone Number"
+                  />
+                   <input
+                    type="email"
+                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    placeholder="Email"
+                  />
+                  <input
+                    type="text"
+                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    placeholder="Designation"
                   />
                 </div>
               </div>

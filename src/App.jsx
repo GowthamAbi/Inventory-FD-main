@@ -18,6 +18,7 @@ import Bills from './components/SideBar/Purchases/Create/Bills'
 import POReceive from './components/SideBar/Purchases/Create/POReceive'
 import PurchasesOrder from './components/SideBar/Purchases/Create/PurchasesOrder'
 import VendorRegister from './components/SideBar/Purchases/Create/VendorRegister'
+
 import CreditNotes from './components/SideBar/sales/Create/Credit Notes'
 import Customers from './components/SideBar/sales/Create/Customers'
 import SalesOrder from './components/SideBar/sales/Create/Sales Order'
@@ -51,7 +52,12 @@ export default function App() {
         <Route path='inventory/customers/new' element={<Customers/>}/>
         <Route path='inventory/salesorder/new' element={<SalesOrder/>}/>
         <Route path='inventory/invoices/new' element={<SalesOrder/>}/>
+        
         {/* Sales Create */}
+        <Route path='inventory/bills/new' element={<Bills/>}/>
+        <Route path='inventory/purchasereceive/new' element={<POReceive/>}/>
+        <Route path='inventory/purchaseorder/new' element={<PurchasesOrder/>}/>
+        <Route path='inventory/vendors/new' element={<VendorRegister/>}/>
         </Route>
       </Routes>
       
