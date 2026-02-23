@@ -99,13 +99,13 @@ setRows(updatedRows)
         </div>
 
         {/*Items Details*/}
-        <table >
+        <table className="mt-8 " >
           <thead >
                 <tr >
-                  <th className="border border-gray-300 h-12">ITEMS DETAILS</th>
-                  <th className="border border-gray-300 h-12">QTY</th>
-                  <th className="border border-gray-300 h-12">RATE</th>
-                  <th className="border border-gray-300 h-12 px-8">AMOUNT</th>
+                  <th className="border border-gray-300 h-12 w-2/4">ITEMS DETAILS</th>
+                  <th className="border border-gray-300 h-12 w-1/4">QTY</th>
+                  <th className="border border-gray-300 h-12 w-1/4">RATE</th>
+                  <th className="border border-gray-300 h-12 px-8 w-1/4">AMOUNT</th>
 
                 </tr>
           </thead>
@@ -113,17 +113,17 @@ setRows(updatedRows)
                 
                     {
                       rows.map((i,index)=>(
-                        <tr key={index} >
-                          <td>
+                        <tr key={index}  >
+                          <td  className="" >
                            <div className="relative">
                              {!i.itemDetails && <span className="absolute text-gray-300 pl-4 top-6  ">{placeHolder.image}</span>}
-                            <input type="text" className={`border border-gray-300 outline-none px-2 h-16  ${i.itemDetails? "pl-8 ":"pl-10"} `} placeholder={placeHolder.name} value={i.itemDetails} onChange={(e)=>handleChange(index,"itemDetails",e.target.value)}/>
+                            <input type="text" className={`border border-gray-300 outline-none px-2 h-16  w-full ${i.itemDetails? "pl-8 ":"pl-10"} `} placeholder={placeHolder.name} value={i.itemDetails} onChange={(e)=>handleChange(index,"itemDetails",e.target.value)}/>
                             
                            </div>
                            </td>
-                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end" placeholder={placeHolder.default}  value={i.qty} onChange={(e)=>handleChange(index,"qty",e.target.value)} /></td>
-                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end" placeholder={placeHolder.default}  value={i.rate} onChange={(e)=>handleChange(index,"rate",e.target.value)} /></td>
-                          <td className="border border-gray-300 outline-none px-2 h-16 text-end">
+                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.qty} onChange={(e)=>handleChange(index,"qty",e.target.value)} /></td>
+                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.rate} onChange={(e)=>handleChange(index,"rate",e.target.value)} /></td>
+                          <td className="border border-gray-300 outline-none px-2 h-16 text-end   w-full">
                             {i.amount}
                             </td>
                           <td><button type="button"
@@ -144,7 +144,7 @@ setRows(updatedRows)
         {/* SubTotal */}
 
         <div className="flex  items-center space-x-4  w-full">
-         <div className="px-4 w-[30%]  " >
+         <div className="px-4 w-[42%]  " >
            <button type="button"  onClick={()=>setRows(pre=>[...pre,{itemDetails:"",qty:"",rate:"",amount:""}])}
             className="bg-blue-500 text-white px-4  mt-8 rounded-3xl pb-2 cursor-pointer hover:bg-blue-600 ">
              <span className="text-2xl font-bold text-center">+</span> Add Row</button>
@@ -157,13 +157,13 @@ setRows(updatedRows)
              </div>
 
 
-          <div className="bg-gray-100 ml-14 rounded-lg p-2 w-2/6  mt-4  ">
+          <div className="bg-gray-100 ml-14 rounded-lg p-2 w-1/2  mt-4  ">
               <div className="flex  ">
                 <div className="w-1/2 ">
                 <p className="pb-4">Sub Total</p>
 
                 <div className="flex  gap-4 w-full pb-4">
-                  <p>Discount</p>
+                  <p className="w-1/2">Discount</p>
                   <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-1/2 "/><label htmlFor="">%</label>
                 </div>
 
@@ -213,7 +213,14 @@ setRows(updatedRows)
 
         </div>
        
-
+          <div className="flex gap-2 justify-center items-center py-4 mt-8">
+            <button className="bg-blue-500 rounded-lg px-4 text-white cursor-pointer hover:bg-blue-200 hover:text-black ">
+              Save
+            </button>
+            <button className="bg-green-500 rounded-lg px-4 text-white cursor-pointer hover:bg-green-200 hover:text-black">
+              Cancel
+            </button>
+          </div>
 
       </form>
     </div>
