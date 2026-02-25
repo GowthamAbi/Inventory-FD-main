@@ -4,7 +4,7 @@ export default function Customers() {
   const [isOption, setIsOption] = useState(null);
     const [istype,setIsType]=useState(false)
     const[contact,setContact]=useState([{
-      Salution :"",FirstName:"",LastName:"",EmailAddress:"",WorkPhone:"",Mobile:"",Designation:"",Designation:""}
+      Salution :"",FirstName:"",LastName:"",EmailAddress:"",WorkPhone:"",Mobile:"",Designation:"",Department:""}
     ])
 
   const option = [
