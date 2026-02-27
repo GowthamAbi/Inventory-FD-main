@@ -3,23 +3,83 @@ import React, { useState } from 'react'
 export default function AddItems() {
   const [isgoods,setIsGoods]=useState(false)
   const [units,setUnits]=useState(null)
+  const [formData,setformData]=useState({
+    type:"goods",
+    name:"",
+    sku:"",
+    unit:"",
+    returnable:true,
+    dimensions:{
+      length:"",
+      width:"",
+      hight:"",
+      unit:""
+    },
+    weight:{
+      value:"",
+      unit:""
+    },
+    manufacturer:"",
+    brand:"",
+    upc:"",
+    ean:"",
+    mpn:"",
+    isbn:"",
+    salesInfo: {
+      enabled: "",
+      price:"",
+      account:"",
+      description:"",
+    },
+      purchaseInfo: {
+      enabled: "",
+      costPrice: "",
+      account: '',
+      description:"",
+      preferredVendor: "",
+    },
+
+    inventory: {
+      trackInventory: "",
+      inventoryAccount:"",
+      openingStock:"",
+    },
+  })
+
+  const handleChange=(e)=>{
+    e.preventDefault()
+
+    const{name,value,checked,type}=e.target
+    setformData((pre)=>({...pre,[name]:type==="checkbox"?checked:value}))
+
+    
+  }
+
+  const handleSubmit=()=>{
+
+
+  }
+
   return (
     <div className="p-4">
 
              <p>New Item</p>
 
-          <form action="" >
+          <form action="" onSubmit={handleSubmit} >
             <div className='flex gap-4 items-center p-4 w-full'>
                 <p>Type </p>
-                <div className='flex gap-4 items-center cursor-pointer'>      
+                <div className='flex gap-4 items-center '>      
 
                   <label className='flex items-center gap-2' >
-                    <input type="radio" name="type" id="goods" onClick={()=>setIsGoods(!isgoods)} /> 
-                    <span>Goods</span>
+                    <input type="radio" name="type" value="goods"  checked={formData.type==="goods"}
+                    onChange={handleChange}
+                    className='cursor-pointer'
+                    /> 
+                    <span>Goods </span>
                   </label>
 
                   <label className='flex items-center gap-2'>
-                    <input type="radio" name="type" id="service" onClick={()=>setIsGoods(!isgoods)}  /> 
+                    <input type="radio" name="type" value="service"  checked={formData.type==="service"} onChange={handleChange} className='cursor-pointer'/> 
                     <span>Service</span>
                   </label>
                 </div>
@@ -30,23 +90,32 @@ export default function AddItems() {
 
               <div className='w-1/2'>
               <div className=' flex gap-4  pb-4 '>
-                <span className='w-2/6 text-red-700'>Name*</span>
+                <span className='w-2/6 text-red-700'>Name* </span>
               <input type="text" 
               className='border bg-white rounded-sm
-              border-gray-200 w-1/2  outline-blue-400 p-1' />
+              border-gray-200 w-1/2  outline-blue-400 p-1'  
+              value={formData.name} name='name'
+              required
+                onChange={handleChange}
+
+              />
               </div>
 
               <div className=' flex gap-4  pb-4 '>
-                <span className='w-2/6'>Stock Keeping Unit</span>
+                <span className='w-2/6'>Stock Keeping Unit </span>
               <input type="text" 
               className='border bg-white rounded-sm
-              border-gray-200 w-1/2  outline-blue-400 p-1' />
+              border-gray-200 w-1/2  outline-blue-400 p-1'
+              value={formData.sku} name='sku'
+              
+                onChange={handleChange}
+              />
               </div>
 
               <div className=' flex gap-4  pb-4 '>
-                <span className='w-2/6 '>Unit</span>
-              <select  value={units}  className='border bg-white rounded-sm
-              border-gray-200 w-1/2  outline-blue-400 p-1 cursor-pointer' onChange={(e)=>setUnits(e.target.value)}>
+                <span className='w-2/6 '>Unit </span>
+              <select name="unit"  value={formData.unit}  onChange={handleChange}  className='border bg-white rounded-sm
+              border-gray-200 w-1/2  outline-blue-400 p-1 cursor-pointer' >
                 <option value="" >Select or type to add</option>
                 <option value="DOZEN">DOZ - DOZEN</option>
                 <option value="BOX">BOX - BOX</option>
@@ -61,8 +130,8 @@ export default function AddItems() {
               </div>
 
 
-              {isgoods && <div className='flex gap-2 justify-center items-center'>
-                <input type="checkbox" /> <p>Returnable Item</p>
+              {formData.type === "goods" && <div className='flex gap-2 justify-center items-center'>
+                <input type="checkbox" name='returnable' checked={formData.returnable} onChange={handleChange} /> <p>Returnable Item</p>
               </div>}
 
 
@@ -278,7 +347,7 @@ export default function AddItems() {
           </div>
 
           <div className='flex gap-4 justify-center '>
-            <button className='bg-blue-400 cursor-pointer px-4 rounded-lg text-white'>SAVE</button>
+            <button className='bg-blue-400 cursor-pointer px-4 rounded-lg text-white' >SAVE</button>
             <button>CANCEL</button>
           </div>
           </form>
