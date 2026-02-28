@@ -2,6 +2,53 @@ import React, { useState } from "react";
 
 export default function VendorRegister() {
   const [isOption, setIsOption] = useState(null);
+  const [formData,setFormData]=useState(
+    {
+   primaryContact:{
+            salution:"",
+            firstName:"",
+            lastName:""
+        },
+        companyName:"",
+        displayName:"",
+        email:"",
+        phoneNumber:{
+            phone:"",
+            office:""
+        },
+
+        billingAddress:{
+            doorNum:"",
+            streetName:"",
+            vilage:"",
+            city:"",
+            pinCode:""
+        },
+
+        shippingAddress:{
+            doorNum:"",
+            streetName:"",
+            vilage:"",
+            city:"",
+            pinCode:""
+        },
+
+        contactPerson:{
+            name:"",
+            phone:""
+        },
+
+        bank:{
+            name:"",
+            bankName:"",
+            ifsc:"",
+            account:""
+        },
+
+        remarks:""
+
+    }
+  )
 
   const option = [
     "Address",
@@ -20,20 +67,35 @@ export default function VendorRegister() {
     "OTHERS",
   ];
 
+  const handleChange=(e)=>{
+    const{name,value}=e.target
+    setFormData(pre=>({...pre,[name]:value}))
+  }
+
+    const handleNestedChange=(e,section)=>{
+    const{name,value}=e.target
+    setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value}}))
+  }
+
+const handleSubmit=(e)=>{
+
+}
+
   return (
     <div>
       <h1>New Vendor</h1>
 
       {/* Primary Deatails */}
-      <div className="w-full">
+      <form className="w-full" action={handleSubmit}>
         <div className="w-1/2 p-4 ">
           <div className="flex  p-2 gap-2 ">
             <p className="w-2/6"> Primary Contact</p>
             <div className="flex justify-center items-center gap-2 w-4/6">
               <select
-                name=""
-                id=""
+                name="salution"
+                value={formData.primaryContact.salution}
                 className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-[20%] text-center"
+                onChange={(e)=>handleNestedChange(e,"primaryContact")}
               >
                 <option value=""></option>
                 <option value="">Mr.</option>
@@ -46,11 +108,17 @@ export default function VendorRegister() {
                 type="text"
                 placeholder="First Name"
                 className="w-[40%] outline-none bg-white rounded-lg border border-gray-300 p-2"
+                name="firstName"
+                value={formData.primaryContact.firstName}
+                onChange={(e)=>handleNestedChange(e,"primaryContact")}
               />
               <input
                 type="text"
                 placeholder="Last Name"
                 className="w-[40%] outline-none bg-white rounded-lg border border-gray-300 p-2"
+                name="lastName"
+                value={formData.primaryContact.lastName}
+                onChange={(e)=>handleNestedChange(e,"primaryContact")}                
               />
             </div>
           </div>
@@ -60,6 +128,9 @@ export default function VendorRegister() {
             <input
               type="text"
               className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleChange}
             />
           </div>
 
@@ -68,6 +139,9 @@ export default function VendorRegister() {
             <input
               type="text"
               className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+              name="displayName"
+              value={formData.displayName}
+              onChange={handleChange}              
             />
           </div>
 
@@ -76,6 +150,9 @@ export default function VendorRegister() {
             <input
               type="email"
               className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}               
             />
           </div>
 
@@ -86,17 +163,22 @@ export default function VendorRegister() {
                 type="phone"
                 placeholder="Phone"
                 className="w-1/2 bg-white rounded-lg border outline-none border-gray-300 p-2 "
+                name="phone"
+                value={formData.phoneNumber.phone}
+                onChange={(e)=>handleNestedChange(e,"phoneNumber")}  
               />
               <input
                 type="phone"
                 placeholder="Offices"
                 className="w-1/2 bg-white rounded-lg border outline-none border-gray-300 p-2 "
+                name="office"
+                value={formData.phoneNumber.office}
+                onChange={(e)=>handleNestedChange(e,"phoneNumber")} 
               />
             </div>
           </div>
         </div>
 
-        <form>
           {/* Tabs */}
           <div className="flex gap-4 pl-4">
             {option.map((item, index) => (
@@ -131,6 +213,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="doorNum"
+                    value={formData.billingAddress.doorNum}
+                    onChange={(e)=>handleNestedChange(e,"billingAddress")}
                   />
                 </div>
 
@@ -139,6 +224,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="streetName"
+                    value={formData.billingAddress.streetName}
+                    onChange={(e)=>handleNestedChange(e,"billingAddress")}
                   />
                 </div>
 
@@ -147,6 +235,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="vilage"
+                    value={formData.billingAddress.vilage}
+                    onChange={(e)=>handleNestedChange(e,"billingAddress")}
                   />
                 </div>
 
@@ -155,6 +246,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="city"
+                    value={formData.billingAddress.city}
+                    onChange={(e)=>handleNestedChange(e,"billingAddress")}
                   />
                 </div>
 
@@ -163,17 +257,23 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="pinCode"
+                    value={formData.billingAddress.pinCode}
+                    onChange={(e)=>handleNestedChange(e,"billingAddress")}
                   />
                 </div>
               </div>
 
-              <div className="p-4 w-1/2">
-                <h1 className="text-center">Shipping Address</h1>
+              <div className="p-4 w-1/2 ">
+                <h1 className="text-center ">Shipping Address</h1>
                 <div className="flex items-center gap-4 py-4">
                   <p className="w-2/6">Door.No</p>
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                     name="doorNum"
+                    value={formData.shippingAddress.doorNum}
+                    onChange={(e)=>handleNestedChange(e,"shippingAddress")}
                   />
                 </div>
 
@@ -182,6 +282,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="streetName"
+                    value={formData.shippingAddress.streetName}
+                    onChange={(e)=>handleNestedChange(e,"shippingAddress")}
                   />
                 </div>
 
@@ -190,6 +293,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="vilage"
+                    value={formData.shippingAddress.vilage}
+                    onChange={(e)=>handleNestedChange(e,"shippingAddress")}
                   />
                 </div>
 
@@ -198,6 +304,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="city"
+                    value={formData.shippingAddress.city}
+                    onChange={(e)=>handleNestedChange(e,"shippingAddress")}
                   />
                 </div>
 
@@ -206,9 +315,14 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="pinCode"
+                    value={formData.shippingAddress.pinCode}
+                    onChange={(e)=>handleNestedChange(e,"shippingAddress")}
                   />
                 </div>
               </div>
+
+              
             </div>
           )}
 
@@ -221,55 +335,20 @@ export default function VendorRegister() {
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
                     placeholder="Name"
+                    name="name"
+                    value={formData.contactPerson.name}
+                    onChange={(e)=>handleNestedChange(e,"contactPerson")}
                   />
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
                     placeholder="Phone Number"
+                    name="phone"
+                    value={formData.contactPerson.phone}
+                    onChange={(e)=>handleNestedChange(e,"contactPerson")}
                   />
                 </div>
 
-                <div className="flex items-center gap-4 py-4">
-                  <p className="w-2/6">Person 2</p>
-                  <input
-                    type="text"
-                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
-                    placeholder="Name"
-                  />
-                  <input
-                    type="text"
-                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
-                    placeholder="Phone Number"
-                  />
-                </div>
-
-                <div className="flex items-center gap-4 py-4">
-                  <p className="w-2/6">Person 3</p>
-                  <input
-                    type="text"
-                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
-                    placeholder="Name"
-                  />
-                  <input
-                    type="text"
-                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
-                    placeholder="Phone Number"
-                  />
-                </div>
-
-                <div className="flex items-center gap-4 py-4">
-                  <p className="w-2/6">Person 4</p>
-                  <input
-                    type="text"
-                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
-                    placeholder="Name"
-                  />
-                  <input
-                    type="text"
-                    className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
-                    placeholder="Phone Number"
-                  />
-                </div>
               </div>
             </div>
           )}
@@ -282,6 +361,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="name"
+                    value={formData.bank.name}
+                    onChange={(e)=>handleNestedChange(e,"bank")}
                   />
                 </div>
 
@@ -290,6 +372,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="bankName"
+                    value={formData.bank.bankName}
+                    onChange={(e)=>handleNestedChange(e,"bank")}
                   />
                 </div>
 
@@ -298,6 +383,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="ifsc"
+                    value={formData.bank.ifsc}
+                    onChange={(e)=>handleNestedChange(e,"bank")}
                   />
                 </div>
 
@@ -306,6 +394,9 @@ export default function VendorRegister() {
                   <input
                     type="text"
                     className="bg-white rounded-lg border outline-none border-gray-300 p-2 w-4/6"
+                    name="account"
+                    value={formData.bank.account}
+                    onChange={(e)=>handleNestedChange(e,"bank")}
                   />
                 </div>
               </div>
@@ -319,9 +410,10 @@ export default function VendorRegister() {
                   Remarks <span> (For Internal Use)</span>
                 </p>
                 <textarea
-                  name=""
-                  id=""
                   className="border border-gray-300 rounded-lg w-full"
+                  name="remarks"
+                  value={formData.remarks}
+                  onChange={handleChange}
                 ></textarea>
               </div>
             </div>
@@ -344,29 +436,17 @@ export default function VendorRegister() {
           )}
 
           <div className="flex gap-2 justify-center items-center py-4">
-            <button className="bg-blue-500 rounded-lg px-4 text-white cursor-pointer hover:bg-blue-200 hover:text-black ">
+            <button onClick={handleSubmit} className="bg-blue-500 rounded-lg px-4 text-white cursor-pointer hover:bg-blue-200 hover:text-black ">
               Save
             </button>
             <button className="bg-green-500 rounded-lg px-4 text-white cursor-pointer hover:bg-green-200 hover:text-black">
               Cancel
             </button>
           </div>
-        </form>
-      </div>
+      
+      </form>
     </div>
   );
 }
 
-{
-  /* 
-[
-"Other Details"
-"Address",
-"Contact Persons",
-"Bank Details",
-"Custom Fields",
-"Attachment Files",
-"Remarks"]
 
-*/
-}

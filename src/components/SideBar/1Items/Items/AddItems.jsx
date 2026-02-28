@@ -16,7 +16,7 @@ export default function AddItems() {
       unit:""
     },
     weight:{
-      value:"",
+      values:"",
       unit:""
     },
     manufacturer:"",
@@ -60,7 +60,7 @@ export default function AddItems() {
  }
 
   const handleSubmit=()=>{
-
+      console.log(formData)
 
   }
 
@@ -169,12 +169,15 @@ export default function AddItems() {
                   
                 <div className='border border-gray-300 rounded-lg w-1/2 h-10'>
                   <input type="text" className='outline-none text-end p-2 w-26 ' 
-                  name='length' value={formData.dimensions.length} onChange={(e)=>handleDimention(e,'dimensions')}/> 
+                  name='length' value={formData.dimensions.length} onChange={(e)=>handleNestedChange(e,'dimensions')}/> 
                   <span className='text-gray-400 '>x</span>
-                  <input type="text" className='outline-none text-end p-2 w-26' name='width' value={formData.dimensions.width} onChange={(e)=>handleDimention(e,'dimensions')}/> 
+                  <input type="text" className='outline-none text-end p-2 w-26' name='width' value={formData.dimensions.width} onChange={(e)=>handleNestedChange(e,'dimensions')}/> 
                   <span className='text-gray-400 '>x</span>
-                  <input type="text" className='outline-none text-end p-2 w-26 ' name='hight' value={formData.dimensions.hight} onChange={(e)=>handleDimention(e,'dimensions')}/>
-                  <select name="unit" value={formData.dimensions.unit} onChange={(e)=>handleDimention(e,'dimensions')} className='outline-none w-14 p-2 text-center '>
+                  <input type="text" className='outline-none text-end p-2 w-26 ' 
+                  name='hight' value={formData.dimensions.hight} onChange={(e)=>handleNestedChange(e,'dimensions')}/>
+                  
+                  <select name="unit" value={formData.dimensions.unit}
+                   onChange={(e)=>handleNestedChange(e,'dimensions')} className='outline-none w-14 p-2 text-center '>
                     <option value=""></option>
                     <option value="in">in</option>
                     <option value="cm">cm</option>
@@ -206,8 +209,9 @@ export default function AddItems() {
 
                     <div className='w-1/2 outline-none border
                     border-gray-300 p-1.5 rounded-lg '>
-                    <input type="text" className='w-[90%] outline-none ' name='weight' value={formData.weight.value} onChange={(e)=>handleDimention(e,'weigth')} />
-                    <select id=""  name='unit' value={formData.weight.unit} onChange={(e)=>handleDimention(e,'weigth')}>
+                    <input type="text" className='w-[90%] outline-none ' 
+                    name='weight' value={formData.weight.value} onChange={(e)=>handleNestedChange(e,'weight')} />
+                    <select   name='unit' value={formData.weight.unit} onChange={(e)=>handleNestedChange(e,'weight')}>
                       <option value="kg">kg</option>
                       <option value="g">g</option>
                       <option value="kg">ib</option>
@@ -349,13 +353,10 @@ export default function AddItems() {
               <input className='rounded-lg outline-none p-1 border h-10 border-gray-300 w-1/2' type="text" name='openingStock' value={formData.inventory.openingStock} onChange={(e)=>handleNestedChange(e,"inventory")} />
             </div>
        
-
-
-
           </div>
 
           <div className='flex gap-4 justify-center '>
-            <button className='bg-blue-400 cursor-pointer px-4 rounded-lg text-white' >SAVE</button>
+            <button  className='bg-blue-400 cursor-pointer px-4 rounded-lg text-white' >SAVE</button>
             <button>CANCEL</button>
           </div>
           </form>
