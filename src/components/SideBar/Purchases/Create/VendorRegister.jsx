@@ -79,6 +79,8 @@ export default function VendorRegister() {
 
 const handleSubmit=(e)=>{
 
+e.preventDefault()
+console.log(formData)
 }
 
   return (
@@ -86,7 +88,7 @@ const handleSubmit=(e)=>{
       <h1>New Vendor</h1>
 
       {/* Primary Deatails */}
-      <form className="w-full" action={handleSubmit}>
+      <form className="w-full" action="" onSubmit={handleSubmit}>
         <div className="w-1/2 p-4 ">
           <div className="flex  p-2 gap-2 ">
             <p className="w-2/6"> Primary Contact</p>
@@ -98,11 +100,11 @@ const handleSubmit=(e)=>{
                 onChange={(e)=>handleNestedChange(e,"primaryContact")}
               >
                 <option value=""></option>
-                <option value="">Mr.</option>
-                <option value="">Mrs.</option>
-                <option value="">Ms.</option>
-                <option value="">Miss</option>
-                <option value="">Dr.</option>
+                <option value="Mr.">Mr.</option>
+                <option value="Mrs.">Mrs.</option>
+                <option value="Ms.">Ms.</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr.">Dr.</option>
               </select>
               <input
                 type="text"
@@ -436,7 +438,7 @@ const handleSubmit=(e)=>{
           )}
 
           <div className="flex gap-2 justify-center items-center py-4">
-            <button onClick={handleSubmit} className="bg-blue-500 rounded-lg px-4 text-white cursor-pointer hover:bg-blue-200 hover:text-black ">
+            <button  className="bg-blue-500 rounded-lg px-4 text-white cursor-pointer hover:bg-blue-200 hover:text-black ">
               Save
             </button>
             <button className="bg-green-500 rounded-lg px-4 text-white cursor-pointer hover:bg-green-200 hover:text-black">

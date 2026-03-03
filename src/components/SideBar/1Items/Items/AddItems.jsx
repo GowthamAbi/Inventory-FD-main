@@ -59,7 +59,8 @@ export default function AddItems() {
       setformData(pre=>({...pre,[section]:{...pre[section],[name]:type==="checkbox"?checked :value}}))
  }
 
-  const handleSubmit=()=>{
+  const handleSubmit=(e)=>{
+    e.preventDefault()
       console.log(formData)
 
   }
@@ -333,7 +334,7 @@ export default function AddItems() {
             <div className=' flex mb-4'>
                <span className='w-2/6 text-red-500'>Inventory Account*</span>
               <input className='rounded-lg outline-none p-1 border border-gray-300 w-1/2'
-               type="text" name='inventoryAccount' value={formData.inventory.inventoryAccount} onChange={(e)=>handleNestedChange(e,"purchaseInfo")}  />
+               type="text" name='inventoryAccount' value={formData.inventory.inventoryAccount} onChange={(e)=>handleNestedChange(e,"inventory")}  />
             </div>
 
             <div className=' flex'>
