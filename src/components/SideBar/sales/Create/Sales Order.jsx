@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 
 export default function SalesOrder() {
+  const[image,setImage]=useState(null)
 const[items,setItems]=useState({
   itemDetails:"",qty:"",rate:"",amount:"",gst:""
 })
@@ -47,6 +48,10 @@ name:"Type or Clicke to Selected Item",
 default:"0.00"
   }
 
+const handleImage=(e)=>{
+setImage(e.target.file[0])
+}
+
   const handleTable=(index,field,e,section)=>{
 
     const{name,value}=e.target
@@ -56,7 +61,8 @@ updatedRows[index][field]=value
 const qty=Number(updatedRows[index].qty) || 0
 const rate=Number(updatedRows[index].rate) || 0
 const total=rate*qty
-updatedRows[index].amount=total
+const finalAmount=total-(total * (Number(updatedRows[index].discount)/100) )
+updatedRows[index].amount=finalAmount
 setRows(updatedRows)
 setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
   }
@@ -74,12 +80,16 @@ setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
     setFormData(pre=>({...pre,[name]:value}))
   }
 
-    const handleNestedChange=(e)=>{
+    const handleNestedChange=(e,section)=>{
       const{name,value}=e.target
     setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
+
   }
 
-
+    const Subtotal=(rows.reduce((t,r)=>t+Number(r.amount || 0 ),0)).toFixed(2)
+    const Charges=(formData.table.charges/100)>0 ? ((formData.table.charges/100) * Number(Subtotal)).toFixed(2):0
+    const Gst=((Number(Charges)+Number(Subtotal))*(formData.table.gst/100)).toFixed(2)
+    const Total=(Number(Subtotal)+Number(Charges)+Number(Gst)).toFixed(2)
 
     return (
     <div>
@@ -227,12 +237,14 @@ setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
 
                 <div className="flex  gap-4 w-full pb-4 ">
                   <p className="w-full">Shipping Charges</p>
-                  <input type="text" name="charges" value={formData.table.charges} onChange={e=>handleNestedChange(e,'table')}    className="bg-white border border-gray-300 outline-none px-2 w-1/2 h-6"/><label htmlFor="">%</label>
+                  <input type="text" name="charges" value={formData.table.charges}
+                   onChange={e=>handleNestedChange(e,'table')}    className="bg-white text-center border border-gray-300 outline-none px-2 w-1/2 h-6"/><label htmlFor="">%</label>
                 </div>
 
                 <div className="flex  gap-4 w-full pb-4">
                   <p className="w-[58%]">GST</p>
-                  <input type="text"  name="gst" value={formData.table.gst} onChange={e=>handleNestedChange(e,'table')}  className="bg-white border border-gray-300 outline-none  w-[30%] "/>
+                  <input type="text"  name="gst" value={formData.table.gst}
+                   onChange={e=>handleNestedChange(e,'table')}  className="bg-white  text-center border border-gray-300 outline-none  w-[30%] "/>
                 </div> 
 
         
@@ -240,9 +252,9 @@ setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
 
               <div className="w-1/2 text-end">
                
-                  <p className="pb-4">{rows.reduce((t,r)=>t+Number(r.amount || 0),0)}</p>
-                  <p className="pb-4">0.000</p>
-                  <p className="pb-4">0.000</p>
+                  <p className="pb-4">{Subtotal}</p>
+                  <p className="pb-4">{Charges}</p>
+                  <p className="pb-4">{Gst}</p>
                   
                       
               </div> 
@@ -251,7 +263,7 @@ setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
               <div className="w-full h-1 bg-gray-200"/>
               <div className="flex ">
                 <p className="w-1/2 pt-4 text-2xl font-bold">Total (Rs.)</p>
-                <p className="w-1/2 text-end pt-4">0.000</p>
+                <p className="w-1/2 text-end pt-4">{Total}</p>
               </div>              
         </div>
 
@@ -264,7 +276,7 @@ setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
          <div className="px-4 w-1/2 " >
            <div className="pt-8 ">
               <p>Terms & Conditions</p>
-              <textarea name="" id="" placeholder="Enter the terms and conditions of your business to be displayed in your transaction"
+              <textarea name="terms" value={formData.terms} onChange={handleChange} placeholder="Enter the terms and conditions of your business to be displayed in your transaction"
                className="border border-gray-300  rounded-t-lg px-4 w-full"></textarea>
           </div>
              </div>
@@ -273,7 +285,7 @@ setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
           <div className=" ml-14 rounded-lg p-2 w-2/6 mt-4 flex flex-col gap-4 items-center py-4  ">
                      <p>Attach File(s) to Purchase Order</p>
                <div className="w-32 h-32 border border-dashed flex justify-center items-center rounded-lg ">
-                      <input type="file" id="uploadFile" className="hidden" />
+                      <input type="file" id="uploadFile" className="hidden"  onChange={handleImage}/>
                      <label htmlFor="uploadFile"> +</label>
              </div>            
         </div>
