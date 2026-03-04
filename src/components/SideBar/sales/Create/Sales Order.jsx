@@ -3,9 +3,30 @@ import Select from "react-select";
 
 export default function SalesOrder() {
 const[items,setItems]=useState({
-  itemDetails:"",qty:"",rate:"",amount:""
+  itemDetails:"",qty:"",rate:"",amount:"",gst:""
 })
-  const[rows,setRows]=useState([{itemDetails:"",qty:"",rate:"",amount:""}])
+  const[rows,setRows]=useState([{itemDetails:"",qty:"",rate:"",amount:"",discount:""}])
+const[formData,setFormData]=useState({
+  
+        customerName:"",
+        salesOrder:"",
+        reference:"",
+        salesOrderDate:"",
+        expectedDate:"",
+
+        table:{
+            itemsDetail:"",
+            qty:"",
+            rate:"",
+            amount:"",
+            discount:"",
+            gst:"",
+            charges:""
+        },
+        notes:"",
+        terms:""
+})
+  
 
   const itemstable=["ITEM DETAILS","QUANTITY","RATE","AMOUNT"]
 
@@ -26,8 +47,9 @@ name:"Type or Clicke to Selected Item",
 default:"0.00"
   }
 
-  const handleChange=(index,field,value)=>{
+  const handleTable=(index,field,e,section)=>{
 
+    const{name,value}=e.target
 const updatedRows =[...rows]
 updatedRows[index][field]=value
 
@@ -36,6 +58,7 @@ const rate=Number(updatedRows[index].rate) || 0
 const total=rate*qty
 updatedRows[index].amount=total
 setRows(updatedRows)
+setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
   }
 
   const handleRemove=(index)=>{
@@ -43,6 +66,21 @@ setRows(updatedRows)
     const updaterow=rows.filter((_,i)=>i!==index)
     setRows(updaterow)
   }
+
+
+  const handleChange=(e)=>{
+    const{name,value}=e.target
+
+    setFormData(pre=>({...pre,[name]:value}))
+  }
+
+    const handleNestedChange=(e)=>{
+      const{name,value}=e.target
+    setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
+  }
+
+
+
     return (
     <div>
       <form action="" className="w-full m-6">
@@ -73,25 +111,41 @@ setRows(updatedRows)
           <div className="flex  w-full pb-4">
             <p className="text-red-500 w-1/6">Sales Order#*</p>
             <input type="text" className=" border border-gray-500
-             rounded-lg outline-none p-2 w-2/6" />
+             rounded-lg outline-none p-2 w-2/6" 
+             name="salesOrder"
+             value={formData.salesOrder}
+             onChange={handleChange}
+             />
           </div>
 
           <div className="flex  w-full pb-4">
             <p className=" w-1/6">Reference#</p>
             <input type="text" className=" border border-gray-500
-             rounded-lg outline-none p-2 w-2/6" />
+             rounded-lg outline-none p-2 w-2/6" 
+             name="reference"
+             value={formData.reference}
+             onChange={handleChange}
+             />
           </div>
 
           <div className="flex  w-full pb-4">
             <p className=" w-1/6 text-red-500 ">Sales Order Date*</p>
             <input type="date" className=" border border-gray-500
-             rounded-lg outline-none p-2 w-2/6" />
+             rounded-lg outline-none p-2 w-2/6"
+             name="salesOrderDate"
+             value={formData.salesOrderDate}
+             onChange={handleChange}
+             />
           </div>
 
           <div className="flex  w-full pb-4">
             <p className=" w-1/6">Expected Shipment Date</p>
             <input type="date" className=" border border-gray-500
-             rounded-lg outline-none p-2 w-2/6" />
+             rounded-lg outline-none p-2 w-2/6" 
+             name="expectedDate"
+             value={formData.expectedDate}
+             onChange={handleChange}
+             />
           </div>
 
         </div>
@@ -113,21 +167,28 @@ setRows(updatedRows)
                     {
                       rows.map((i,index)=>(
                         <tr key={index}  >
+
                           <td  className="" >
                            <div className="relative">
                              {!i.itemDetails && <span className="absolute text-gray-300 pl-4 top-6  ">{placeHolder.image}</span>}
-                            <input type="text" className={`border border-gray-300 outline-none px-2 h-16  w-full ${i.itemDetails? "pl-8 ":"pl-10"} `} placeholder={placeHolder.name} value={i.itemDetails} onChange={(e)=>handleChange(index,"itemDetails",e.target.value)}/>
-                            
+                            <input type="text" className={`border border-gray-300 outline-none px-2 h-16  w-full ${i.itemDetails? "pl-8 ":"pl-10"} `} 
+                            placeholder={placeHolder.name} value={i.itemDetails} onChange={(e)=>handleTable(index,"itemDetails",e,"table")}/>
                            </div>
                            </td>
-                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.qty} onChange={(e)=>handleChange(index,"qty",e.target.value)} /></td>
+
                           <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" 
-                          placeholder={placeHolder.default}  value={i.rate} onChange={(e)=>handleChange(index,"rate",e.target.value)} /></td>
+                          placeholder={placeHolder.default}  value={i.qty} onChange={(e)=>handleTable(index,"qty",e,"table")} /></td>
+
                           <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" 
-                          placeholder={placeHolder.default}  value={i.discount} onChange={(e)=>handleChange(index,"discount",e.target.value)} /></td>
+                          placeholder={placeHolder.default}  value={i.rate} onChange={(e)=>handleTable(index,"rate",e,"table")} /></td>
+
+                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" 
+                          placeholder={placeHolder.default}  value={i.discount} onChange={(e)=>handleTable(index,"discount",e,"table")} /></td>
+
                           <td className="border border-gray-300 outline-none px-2 h-16 text-end   w-full">
                             {i.amount}
                             </td>
+
                           <td><button type="button"
                            className="text-red-500 text-2xl font-bold cursor-pointer   outline-none px-2 h-16 disabled:opacity-50 disabled:cursor-not-allowed mx-4" onClick={()=>handleRemove(index)} 
                            
@@ -147,14 +208,14 @@ setRows(updatedRows)
 
         <div className="flex  items-center space-x-4  w-full">
          <div className="px-4 w-[42%]  " >
-           <button type="button"  onClick={()=>setRows(pre=>[...pre,{itemDetails:"",qty:"",rate:"",amount:""}])}
+           <button type="button"  onClick={()=>setRows(pre=>[...pre,{itemDetails:"",qty:"",rate:"",amount:"",discount:""}])}
             className="bg-blue-500 text-white px-4  mt-8 rounded-3xl pb-2 cursor-pointer hover:bg-blue-600 ">
              <span className="text-2xl font-bold text-center">+</span> Add Row</button>
 
            <div className="pt-8 ">
               <p>Customer Notes</p>
-              <textarea name="" id="" placeholder="Will be Displayed on Purchase Order"
-               className="border border-gray-300  rounded-t-lg px-4 w-full"></textarea>
+              <textarea name="note" value={formData.notes} id="" placeholder="Will be Displayed on Purchase Order"
+               className="border border-gray-300  rounded-t-lg px-4 w-full"  onChange={handleChange}></textarea>
           </div>
              </div>
 
@@ -166,12 +227,12 @@ setRows(updatedRows)
 
                 <div className="flex  gap-4 w-full pb-4 ">
                   <p className="w-full">Shipping Charges</p>
-                  <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-1/2 h-6"/><label htmlFor="">%</label>
+                  <input type="text" name="charges" value={formData.table.charges} onChange={e=>handleNestedChange(e,'table')}    className="bg-white border border-gray-300 outline-none px-2 w-1/2 h-6"/><label htmlFor="">%</label>
                 </div>
 
                 <div className="flex  gap-4 w-full pb-4">
-                  <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-full"/>
-                  <input type="text"  className="bg-white border border-gray-300 outline-none px-2 w-full"/>
+                  <p className="w-[58%]">GST</p>
+                  <input type="text"  name="gst" value={formData.table.gst} onChange={e=>handleNestedChange(e,'table')}  className="bg-white border border-gray-300 outline-none  w-[30%] "/>
                 </div> 
 
         
@@ -179,10 +240,11 @@ setRows(updatedRows)
 
               <div className="w-1/2 text-end">
                
+                  <p className="pb-4">{rows.reduce((t,r)=>t+Number(r.amount || 0),0)}</p>
                   <p className="pb-4">0.000</p>
                   <p className="pb-4">0.000</p>
-                  <p className="pb-4">0.000</p>
-                    
+                  
+                      
               </div> 
               </div>
               
