@@ -19,9 +19,23 @@ import POReceive from './components/SideBar/Purchases/Create/POReceive'
 import PurchasesOrder from './components/SideBar/Purchases/Create/PurchasesOrder'
 import VendorRegister from './components/SideBar/Purchases/Create/VendorRegister'
 
+{/* Sales Create */}
 import CreditNotes from './components/SideBar/sales/Create/Credit Notes'
 import Customers from './components/SideBar/sales/Create/Customers'
 import SalesOrder from './components/SideBar/sales/Create/Sales Order'
+import DeliveryChallans from './components/SideBar/sales/Create/Delivery Challans'
+import Invoices from './components/SideBar/sales/Create/Invoices'
+import PaymentsReceived from './components/SideBar/sales/Create/Payments Received'
+import RetainerInvoices from './components/SideBar/sales/Create/Retainer Invoices'
+
+{/* Sales List */}
+import Customerslist from './components/SideBar/sales/List/Customers list'
+import CreditNoteslist from './components/SideBar/sales/List/Credit Notes list'
+import SalesOrderlist from './components/SideBar/sales/List/Sales Order list'
+import DeliveryChallanslist from './components/SideBar/sales/List/Delivery Challans list'
+import Invoiceslist from './components/SideBar/sales/List/Invoices list'
+import PaymentsReceivedlist from './components/SideBar/sales/List/Payments Received list'
+import RetainerInvoiceslist from './components/SideBar/sales/List/Retainer Invoices list'
 
 export default function App() {
   return (
@@ -48,12 +62,25 @@ export default function App() {
         <Route path='inventory/purchaseorder' element={<PurchasesOrderList/>}/>
         <Route path='inventory/vendors' element={<VendorList/>}/>
 
-        {/* Purchases Create */}
+        {/* Sales Create */}
         <Route path='inventory/customers/new' element={<Customers/>}/>
         <Route path='inventory/salesorder/new' element={<SalesOrder/>}/>
-        <Route path='inventory/invoices/new' element={<SalesOrder/>}/>
+        <Route path='inventory/invoices/new' element={<Invoices/>}/>
+        <Route path='inventory/creditnotes/new' element={<CreditNotes/>}/>
+        <Route path='inventory/deliverychallans/new' element={<DeliveryChallans/>}/>
+        <Route path='inventory/paymentreceived/new' element={<PaymentsReceived/>}/>
+        <Route path='inventory/retainerinvoices/new' element={<RetainerInvoices/>}/>
+
+        {/* Sales List */}
+        <Route path='inventory/customers/' element={<Customerslist/>}/>
+        <Route path='inventory/salesorder/' element={<SalesOrderlist/>}/>
+        <Route path='inventory/invoices/' element={<Invoiceslist/>}/>
+        <Route path='inventory/creditnotes/' element={<CreditNoteslist/>}/>
+        <Route path='inventory/deliverychallans/' element={<DeliveryChallanslist/>}/>
+        <Route path='inventory/paymentreceived/' element={<PaymentsReceivedlist/>}/>
+        <Route path='inventory/retainerinvoices/' element={<RetainerInvoiceslist/>}/>
         
-        {/* Sales Create */}
+        {/* Purchases Create */}
         <Route path='inventory/bills/new' element={<Bills/>}/>
         <Route path='inventory/purchasereceive/new' element={<POReceive/>}/>
         <Route path='inventory/purchaseorder/new' element={<PurchasesOrder/>}/>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Invoiices() {
+export default function Invoices() {
 const[items,setItems]=useState({
   itemDetails:"",qty:"",rate:"",amount:""
 })

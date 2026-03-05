@@ -44,7 +44,7 @@
         </svg>
     ),
         name:"Sales",
-        list:["Customers","Retainer Invoices","Sales Order","Invoices","Delivery Challans","Payment Received","Sales Returns","Credit Notes"]
+        list:["Customers","Retainer Invoices","Sales Order","Invoices","Delivery Challans","Payment Received","Credit Notes"]
 
 }]
 

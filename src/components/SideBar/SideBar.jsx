@@ -55,9 +55,9 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {itemsActive && item.list.map((list,j)=>(
-                            <ul key={j} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":
+                            <ul key={j} onClick={()=>handleCLick({list})} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":
                             "justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
-                                <li onClick={()=>handleCLick({list})}>{list}</li>
+                                <li >{list}</li>
                                 <button className='cursor-pointer pr-4 text-lg bg-' onClick={()=>handlenavigate({list})}>+</button>
                             </ul>
                         ))}
@@ -77,8 +77,8 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {inventoryActive && item.list.map((list,j)=>(
-                            <ul key={j} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
-                                <li onClick={()=>handleCLick({list})} >{list}</li>
+                            <ul key={j} onClick={()=>handleCLick({list})} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
+                                <li  >{list}</li>
                                 <button className='cursor-pointer pr-4 text-lg bg-' onClick={()=>handlenavigate({list})}>+</button>
                             </ul>
                         ))}
@@ -98,8 +98,8 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {salesActive && item.list.map((list,j)=>(
-                            <ul key={j} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
-                                <li onClick={()=>handleCLick({list})}>{list}</li>
+                            <ul key={j} onClick={()=>handleCLick({list})} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
+                                <li >{list}</li>
                                 <button className='cursor-pointer pr-4 text-lg bg-' onClick={()=>handlenavigate({list})}>+</button>
                             </ul>
                         ))}
@@ -119,8 +119,8 @@ export default function SideBar() {
                             <p className='text-white '>{item.name}</p>
                         </div>
                         {purchaseActive && item.list.map((list,j)=>(
-                            <ul key={j} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
-                                <li onClick={()=>handleCLick({list})}>{list}</li>
+                            <ul key={j} onClick={()=>handleCLick({list})} className= {`${isSelect===list?"bg-blue-500 pl-14 rounded-lg flex text-white justify-between ":"justify-between pl-14 hover:bg-gray-700 flex text-white"}`} >
+                                <li >{list}</li>
                                 <button className='cursor-pointer pr-4 text-lg bg-' onClick={()=>handlenavigate({list})}>+</button>
                             </ul>
                         ))}
