@@ -3,9 +3,23 @@ import Select from 'react-select'
 
 
 export default function POReceive() {
-  const[inputData,setInputData]=useState([
-    {item:"",order:"",receive:"",transit:"",qtyReceive:""}
-  ])
+  const[inputData,setInputData]=useState([{items:"",ordered:"",received:"",inTransit:"",qtytoReceive:""} ])
+
+const[formData,setFormData]=useState({
+  vendorName:"",
+    poNumber:"",
+    poReceiveNumber:"",
+    receiveDate:"",
+    
+    table:{
+        items:"",
+        ordered:"",
+        received:"",
+        inTransit:"",
+        qtytoReceive:""
+    }
+})
+
   const options=[
   { value: "apple", label: "Apple" },
   { value: "banana", label: "Banana" },
@@ -18,37 +32,51 @@ export default function POReceive() {
   { value: "po-8764", label: "po-8764" },
   ]
 
-  const itemDetails=[
-    {}
-  ]
+const handleTableChange=(index,e,section)=>{
 
-const handleChange=(index,field,value)=>{
+      const{name,value}=e.target
+      const updatedRows =[...inputData]
+      updatedRows[index][name]=value
+      setInputData(updatedRows)
+      setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value}}))
 
-const updatedRows =[...inputData]
-updatedRows[index][field]=value
-
-setInputData(updatedRows)
   }
 
   const handleRemove=(index)=>{
-  
     const updaterow=inputData.filter((_,i)=>i!==index)
     setInputData(updaterow)
   }
 
+  const handleChange=(e)=>{
+    const{name,value}=e.target
+    setFormData(pre=>({...pre,[name]:value}))
+  }
+
+    const handleNestedChange=(e,section)=>{
+    const{name,value}=e.target
+    setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value}}))
+  }
+
+const handleSubmit=(e)=>{
+e.preventDefault()
+console.log(formData)
+}
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       {/* Vendor Select */}
       <div>
         <div className='flex items-center mt-8 gap-16 px-2 '>
           <p>Vendor Name</p>
-          <Select options={options} isSearchable isClearable   placeholder='Search Vendor Name'
+          <Select options={options} name='vendorName' value={formData.vendorName} onChange={handleChange}
+           isSearchable isClearable   placeholder='Search Vendor Name'
            className='w-1/2  '/>
         </div>
         
         <div className='flex items-center mt-8 gap-18 px-2 '>
           <p className='text-red-500'>Po Number*</p>
-          <Select options={poNumber} isSearchable isClearable placeholder='Search Po Number'
+          <Select options={poNumber} name='poNumber' value={formData.poNumber} onChange={handleChange} 
+           isSearchable isClearable placeholder='Search Po Number'
            className='w-1/2  '/>
         </div>
       </div>
@@ -57,12 +85,12 @@ setInputData(updatedRows)
       
         <div className='flex items-center mt-8 gap-18 px-2 '>
           <p className='text-red-500'>Po Receive Number*</p>
-          <input type="text" className='w-[20%] border border-gray-300 outline-none px-2 rounded-lg' />
+          <input type="text" name='' value={formData.poReceiveNumber} onChange={handleChange} className='w-[20%] border border-gray-300 outline-none px-2 rounded-lg' />
         </div>
         <div>
          <div className='flex items-center mt-8 gap-30 px-2 '>
           <p className='text-red-500'>Receive Date*</p>
-          <input type="date" className='w-[20%]  border border-gray-300 outline-none px-2 rounded-lg' />
+          <input type="date" name='receiveDate' value={formData.receiveDate} onChange={handleChange} className='w-[20%]  border border-gray-300 outline-none px-2 rounded-lg' />
         </div>
      
       </div>
@@ -84,41 +112,46 @@ setInputData(updatedRows)
     <tr key={index} >
       <td className='border py-4'>
         <input
-          value={i.item}
-          onChange={(e) => handleChange(index, "item", e.target.value)}
-          className="outline-none  px-2 w-2/6"
+        name='items'
+          value={formData.table.items}
+          onChange={(e) => handleTableChange(index, e,"table")}
+          className=" px-2 outline-none  w-full "
         />
       </td>
 
       <td className='border '>
         <input
-          value={i.order}
-          onChange={(e) => handleChange(index, "order", e.target.value)}
-          className="outline-none  px-2 w-1/6"
+        name='ordered'
+          value={formData.table.ordered}
+          onChange={(e) => handleTableChange(index,e,"table")}
+          className=" px-2 outline-none  w-full "
         />
       </td>
 
       <td className='border '>
         <input
-          value={i.receive}
-          onChange={(e) => handleChange(index, "receive", e.target.value)}
-          className="outline-none  px-2 w-1/6"
+        name='received'
+          value={formData.table.received}
+          onChange={(e) => handleTableChange(index, e,"table")}
+          className=" px-2 outline-none  w-full "
         />
       </td>
 
       <td className='border '>
         <input
-          value={i.transit}
-          onChange={(e) => handleChange(index, "transit", e.target.value)}
-          className="outline-none  px-2 w-1/6"
+        name='inTransit'
+          value={formData.table.inTransit}
+          onChange={(e) => handleTableChange(index, e,"table")}
+          className=" px-2 outline-none  w-full "
         />
       </td>
 
       <td className='border '>
         <input
-          value={i.qtyReceive}
-          onChange={(e) => handleChange(index, "qtyReceive", e.target.value)}
-          className="outline-none px-2 w-1/6"
+        name='qtytoReceive'
+          value={formData.table.qtytoReceive}
+          onChange={(e) => handleTableChange(index, e,"table")}
+          className=" px-2 outline-none  w-full "
         />
       </td>
 
@@ -137,7 +170,7 @@ setInputData(updatedRows)
 </tbody>
       </table>
       <div>
-        <button   onClick={()=>setInputData(pre=>[...pre,{item:"",order:"",receive:"",transit:"",qtyReceive:""}])}
+        <button type='button'  onClick={()=>setInputData(pre=>[...pre,{items:"",ordered:"",received:"",inTransit:"",qtytoReceive:""}])}
             className="bg-blue-500 text-white px-4  mt-8 rounded-3xl pb-2 cursor-pointer hover:bg-blue-600 ">
           <span className="text-2xl font-bold text-center">+</span> Add Row</button>
       </div>
@@ -160,6 +193,6 @@ setInputData(updatedRows)
               Cancel
             </button>
           </div>
-    </div>
+    </form>
   )
 }

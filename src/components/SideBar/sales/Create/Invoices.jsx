@@ -6,6 +6,26 @@ const[items,setItems]=useState({
 })
   const[rows,setRows]=useState([{itemDetails:"",qty:"",rate:"",amount:""}])
 
+  const[formData,setFormData]=useState({
+          vendorName:"",
+          deliveryAddress:"",
+    purchaseOrder:"",
+    reference:"",
+    date:"",
+    deliveryDate:"",
+
+    table:{
+            itemsDetail:"",
+            qty:"",
+            rate:"",
+            amount:"",
+            discount:"",
+            gst:""
+        },
+        notes:"",
+        terms:""
+  })
+
   const itemstable=["ITEM DETAILS","QUANTITY","RATE","AMOUNT"]
   const placeHolder={
     image:<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -17,16 +37,18 @@ name:"Type or Clicke to Selected Item",
 default:"0.00"
   }
 
-  const handleChange=(index,field,value)=>{
+  const handleTable=(index,field,e,section)=>{
 
-const updatedRows =[...rows]
-updatedRows[index][field]=value
+              const{name,value}=e.target
+          const updatedRows =[...rows]
+          updatedRows[index][field]=value
 
-const qty=Number(updatedRows[index].qty) || 0
-const rate=Number(updatedRows[index].rate) || 0
-const total=rate*qty
-updatedRows[index].amount=total
-setRows(updatedRows)
+          const qty=Number(updatedRows[index].qty) || 0
+          const rate=Number(updatedRows[index].rate) || 0
+          const total=Number(rate*qty) || 0
+          updatedRows[index].amount=total
+          setRows(updatedRows)
+          setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
   }
 
   const handleRemove=(index)=>{
@@ -34,6 +56,24 @@ setRows(updatedRows)
     const updaterow=rows.filter((_,i)=>i!==index)
     setRows(updaterow)
   }
+
+ const handleChange=(e)=>{
+    const{name,value}=e.target
+
+    setFormData(pre=>({...pre,[name]:value}))
+  }
+
+    const handleNestedChange=(e,section)=>{
+      const{name,value}=e.target
+    setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
+
+  }
+
+      const Subtotal=(rows.reduce((t,r)=>t+Number(r.amount || 0 ),0)).toFixed(2)
+    const Charges=(formData.table.charges/100)>0 ? ((formData.table.charges/100) * Number(Subtotal)).toFixed(2):0
+    const Gst=((Number(Charges)+Number(Subtotal))*(formData.table.gst/100)).toFixed(2)
+    const Total=(Number(Subtotal)+Number(Charges)+Number(Gst)).toFixed(2)
+
     return (
     <div>
       <form action="" className="w-full m-6">
@@ -43,8 +83,8 @@ setRows(updatedRows)
           <div className="flex  w-full pb-4">
           <h4 className="text-red-500  w-1/6">Vendor Name*</h4>
           <div className="flex justify-center items-center w-1/2">
-            <input type="text" className=" border-b border-l border-t border-gray-500
-             rounded-l-lg outline-none p-2 w-full" />
+            <input type="text" required className="  border-b border-l border-t border-gray-500
+             rounded-l-lg outline-none p-2 w-full" name="vendorName" value={formData.vendorName} onChange={handleChange} />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -65,9 +105,11 @@ setRows(updatedRows)
           <div className="flex  w-full pb-4">
             <p className="text-red-500 w-1/6">Delivery Address*</p>
             <div className="flex gap-4">
-              <input type="radio" id="organization" name="type"/>
+              <input type="radio" id="organization" name="type" 
+              value={formData.deliveryAddress==="organization"} onChange={handleChange}/>
               <label htmlFor="">Organization</label>
-              <input type="radio" id="customer" name="type" />
+              <input type="radio" id="customer" name="type"
+              value={formData.deliveryAddress==="customer"} onChange={handleChange} />
               <label htmlFor="">Customer</label>
             </div>
           </div>
@@ -75,25 +117,25 @@ setRows(updatedRows)
           <div className="flex  w-full pb-4">
             <p className="text-red-500 w-1/6">Purchase Order#*</p>
             <input type="text" className=" border border-gray-500
-             rounded-lg outline-none p-2 w-2/6" />
+             rounded-lg outline-none p-2 w-2/6" name="purchaseOrder" value={formData.purchaseOrder} onChange={handleChange} />
           </div>
 
           <div className="flex  w-full pb-4">
             <p className=" w-1/6">Reference#</p>
             <input type="text" className=" border border-gray-500
-             rounded-lg outline-none p-2 w-2/6" />
+             rounded-lg outline-none p-2 w-2/6" name="reference" value={formData.reference} onChange={handleChange} />
           </div>
 
           <div className="flex  w-full pb-4">
             <p className=" w-1/6">Date</p>
             <input type="date" className=" border border-gray-500
-             rounded-lg outline-none p-2 w-2/6" />
+             rounded-lg outline-none p-2 w-2/6" name="date" value={formData.date} onChange={handleChange} />
           </div>
 
           <div className="flex  w-full pb-4">
             <p className=" w-1/6">Delivery Date</p>
             <input type="date" className=" border border-gray-500
-             rounded-lg outline-none p-2 w-2/6" />
+             rounded-lg outline-none p-2 w-2/6" name="deliveryDate" value={formData.deliveryDate} onChange={handleChange} />
           </div>
 
         </div>
@@ -117,15 +159,15 @@ setRows(updatedRows)
                           <td  className="" >
                            <div className="relative">
                              {!i.itemDetails && <span className="absolute text-gray-300 pl-4 top-6  ">{placeHolder.image}</span>}
-                            <input type="text" className={`border border-gray-300 outline-none px-2 h-16  w-full ${i.itemDetails? "pl-8 ":"pl-10"} `} placeholder={placeHolder.name} value={i.itemDetails} onChange={(e)=>handleChange(index,"itemDetails",e.target.value)}/>
+                            <input type="text" className={`border border-gray-300 outline-none px-2 h-16  w-full ${i.itemDetails? "pl-8 ":"pl-10"} `} placeholder={placeHolder.name} value={i.itemDetails} onChange={(e)=>handleTable(index,"itemDetails",e,"table")}/>
                             
                            </div>
                            </td>
-                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.qty} onChange={(e)=>handleChange(index,"qty",e.target.value)} /></td>
-                          <td><input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.rate} onChange={(e)=>handleChange(index,"rate",e.target.value)} /></td>
-                          <td className="border border-gray-300 outline-none px-2 h-16 text-end   w-full">
-                            {i.amount}
-                            </td>
+                          <td>
+                            <input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.qty} onChange={(e)=>handleTable(index,"qty",e,"table")} /></td>
+                          <td>
+                            <input type="text" className="border border-gray-300 outline-none px-2 h-16 text-end  w-full" placeholder={placeHolder.default}  value={i.rate} onChange={(e)=>handleTable(index,"rate",e,"table")} /></td>
+                              <td className="border border-gray-300 outline-none px-2 h-16 text-end   w-full">{i.amount} </td>
                           <td><button type="button"
                            className="text-red-500 text-2xl font-bold cursor-pointer   outline-none px-2 h-16 disabled:opacity-50 disabled:cursor-not-allowed mx-4" onClick={()=>handleRemove(index)} 
                            
@@ -151,8 +193,8 @@ setRows(updatedRows)
 
            <div className="pt-8 ">
               <p>Customer Notes</p>
-              <textarea name="" id="" placeholder="Will be Displayed on Purchase Order"
-               className="border border-gray-300  rounded-t-lg px-4 w-full"></textarea>
+              <textarea name="notes" id="" placeholder="Will be Displayed on Purchase Order"
+               className="border border-gray-300  rounded-t-lg px-4 w-full" value={formData.notes} onChange={handleChange} ></textarea>
           </div>
              </div>
 
@@ -175,16 +217,16 @@ setRows(updatedRows)
 
               <div className="w-1/2 text-end">
                
-                  <p className="pb-4">0.000</p>
-                  <p className="pb-4">0.000</p>
-                  <p className="pb-4">0.000</p>
+                  <p className="pb-4">{Subtotal}</p>
+                  <p className="pb-4">{Charges}</p>
+                  <p className="pb-4">{Gst}</p>
               </div> 
               </div>
               
               <div className="w-full h-1 bg-gray-200"/>
               <div className="flex ">
                 <p className="w-1/2 pt-4">Total</p>
-                <p className="w-1/2 text-end pt-4">0.000</p>
+                <p className="w-1/2 text-end pt-4">{Total}</p>
               </div>              
         </div>
 
@@ -197,7 +239,7 @@ setRows(updatedRows)
          <div className="px-4 w-1/2 " >
            <div className="pt-8 ">
               <p>Terms & Conditions</p>
-              <textarea name="" id="" placeholder="Enter the terms and conditions of your business to be displayed in your transaction"
+              <textarea name="terms"  value={formData.terms} onChange={handleChange} placeholder="Enter the terms and conditions of your business to be displayed in your transaction"
                className="border border-gray-300  rounded-t-lg px-4 w-full"></textarea>
           </div>
              </div>

@@ -54,17 +54,17 @@ setImage(e.target.file[0])
 
   const handleTable=(index,field,e,section)=>{
 
-    const{name,value}=e.target
-const updatedRows =[...rows]
-updatedRows[index][field]=value
+      const{name,value}=e.target
+      const updatedRows =[...rows]
+      updatedRows[index][field]=value
 
-const qty=Number(updatedRows[index].qty) || 0
-const rate=Number(updatedRows[index].rate) || 0
-const total=rate*qty
-const finalAmount=total-(total * (Number(updatedRows[index].discount)/100) )
-updatedRows[index].amount=finalAmount
-setRows(updatedRows)
-setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
+      const qty=Number(updatedRows[index].qty) || 0
+      const rate=Number(updatedRows[index].rate) || 0
+      const total=rate*qty
+      const finalAmount=total-(total * (Number(updatedRows[index].discount)/100) )
+      updatedRows[index].amount=finalAmount
+      setRows(updatedRows)
+      setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
   }
 
   const handleRemove=(index)=>{
@@ -100,7 +100,7 @@ setFormData(pre=>({...pre,[section]:{...pre[section],[name]:value }}))
           <div className="flex  w-full pb-4">
           <h4 className="text-red-500  w-1/6">Customer Name*</h4>
           <div className="flex justify-center items-center w-1/2">
-            <Select options={options} className="   w-full" />
+            <Select options={options} className="w-full" name="customername" value={formData.customerName} onChange={handleChange} />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
